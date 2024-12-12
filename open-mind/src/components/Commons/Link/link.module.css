@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.link_item {
+  width: 1.125rem;
+  height: 1.125rem;
+  background-color: #542f1a;
+  padding: 0.6875rem;
+  border-radius: 12.5rem;
+}
+
+.link_item:hover {
+  border: 1px solid black;
+}
+
+.link_item:active {
+  border: none;
+  background-color: #341909;
+}
+
+.kakaotalk_item {
+  width: 1.125rem;
+  height: 1.125rem;
+  background-color: #fee500;
+  padding: 0.6875rem;
+  border-radius: 12.5rem;
+}
+
+.kakaotalk_item:hover {
+  border: 1px solid black;
+}
+
+.kakaotalk_item:active {
+  border: none;
+  background-color: #c9bf04;
+}
+
+.facebook_item {
+  width: 1.125rem;
+  height: 1.125rem;
+  background-color: #1877f2;
+  padding: 0.6875rem;
+  border-radius: 12.5rem;
+}
+
+.facebook_item:hover {
+  border: 1px solid black;
+}
+
+.facebook_item:active {
+  border: none;
+  background-color: #1b6ce6;
+}

@@ -1,4 +1,6 @@
-:global {
+body {
+  margin: 0;
+  box-sizing: border-box;
   font-family: "Pretendard Variable", Pretendard, -apple-system,
     BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
@@ -168,7 +170,7 @@
   border: none;
   border-radius: 12.5rem;
   padding: 0.3125rem 1.2rem;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   color: #ffffff;
   background-color: #542f1a;
@@ -178,7 +180,7 @@
 
 .delete_button:hover {
   border: 2px solid #341909;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .delete_button:active {
@@ -187,14 +189,14 @@
 
 @media screen and (min-width: 375px) and (max-width: 767px) {
   .delete_button {
-    width: 70px;
-    height: 25px;
-    font-size: 10px;
-    padding: 0 10px;
+    width: 4.375rem;
+    height: 1.5625rem;
+    font-size: 0.625rem;
+    padding: 0 0.625rem;
   }
 
   .delete_button:hover {
     border: 2px solid #341909;
-    font-size: 10px;
+    font-size: 0.625rem;
   }
 }
