@@ -7,11 +7,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        {/* 버튼 테스트 페이지 */}
-        <Route path="/buttonTest" element={<ButtonTest />} />
-        {/* 개별 피드 [todo : 이후에 id 속성 적용] */}
-        <Route path="/post" element={<IndividualFeed />} />
+        <Route path="/">
+          <Route index element={<Homepage />} />
+          <Route path="List" element={<IndividualFeed />} />
+          <Route path="post/:subjectSlug" element={<ButtonTest />}>
+            <Route path="answer" element={<IndividualFeed />} />
+          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
