@@ -1,5 +1,6 @@
 /* global 가상 선택자 css 참조 */
 @import url("../../styles/global.css");
+@import url("https://fonts.googleapis.com/css2?family=Actor&display=swap");
 
 body {
   margin: 0;
@@ -67,21 +68,37 @@ body {
 
 .main {
   margin-top: 11.8125rem;
-  width: 716px;
-  height: 1138px;
+  width: 44.75rem;
+  height: 44.75rem;
+  background-color: var(--brown10-color);
+  border: 1px solid var(--brown30-color);
+  border-radius: 1rem;
+  overflow: scroll;
+  -ms-overflow-style: none;
+}
+
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+.empty_main {
+  margin-top: 11.8125rem;
+  width: 44.75rem;
+  height: 20.625rem;
   background-color: var(--brown10-color);
   border: 1px solid var(--brown30-color);
   border-radius: 1rem;
 }
 
-.question_num {
+.question_header {
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 1rem 0 1rem 0;
 }
 
-.question_num_text {
+.question_header_text {
+  font-family: "Actor";
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 1.5625rem;
@@ -91,38 +108,86 @@ body {
 .messages_icon {
   width: 1.5rem;
   height: 1.5rem;
-  padding-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
-.feed_card {
-  border-radius: 1rem;
-  padding: 2rem;
-  background-color: var(--gray10-color);
-  box-shadow: var(--box-shadow-1pt);
-  margin: 0 1rem 0 1rem;
+.feed_list div {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 2rem;
+  gap: 1.25rem;
 }
 
-.answer_boolean_text {
-  width: 3.25rem;
-  height: 1.125rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border: 1px solid var(--brown40-color);
-  border-radius: 0.5rem;
-  padding: 0.25rem 0.25rem;
-  background-color: var(--gray10-color);
-  color: var(--brown40-color);
+.feed_list {
+  margin-bottom: 1rem;
 }
 
-.feed_question {
+.writing_question {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin: 3.625rem 1.5rem 1.5rem 0;
 }
 
-.feed_answer {
+/* 반응형 구현 */
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .main {
+    width: 44rem;
+  }
+
+  .empty_main {
+    width: 44rem;
+  }
 }
 
-.feed_favorite {
+/* mobile */
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .header_logo {
+    padding-top: 2.5rem;
+  }
+
+  .header_logo_img {
+    width: 7.75rem;
+    height: 3.0625rem;
+  }
+
+  .profile_img {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 50%;
+  }
+
+  .nickname {
+    color: var(--gray60-color);
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .main {
+    width: 20.4375rem;
+    margin-top: 7rem;
+  }
+
+  .empty_main {
+    width: 20.4375rem;
+    margin-top: 7rem;
+  }
+
+  .question_header_text {
+    font-family: "Actor";
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    color: var(--brown40-color);
+  }
+
+  .messages_icon {
+    width: 1.375rem;
+    height: 1.375rem;
+    margin-right: 0.5rem;
+  }
+
+  .writing_question {
+    margin: 3rem 1.5rem 1.5rem 0;
+  }
 }

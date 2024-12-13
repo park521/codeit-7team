@@ -25,6 +25,7 @@ body {
   background-color: var(--brown40-color);
   box-shadow: var(--box-shadow-1pt);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .writing_question_button:hover {
