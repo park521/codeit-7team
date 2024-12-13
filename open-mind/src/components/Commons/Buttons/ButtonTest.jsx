@@ -4,6 +4,7 @@ import GoQuestionButton from "./GoQuestionButton";
 import TakeQuestions from "./TakeQuestions";
 import WritingQuestionButton from "./WritingQuestionButton";
 import DeleteButton from "./DeleteButton";
+import Badge from "../Badge/Badge";
 
 // 버튼 내용 변수 선언
 const do_question_button = "질문 작성하기"; // desktop & tablet
@@ -49,6 +50,7 @@ function ButtonTest() {
       <WritingQuestionButton button_word={buttonWord} /> <br /> <br />
       <h2>삭제하기</h2>
       <DeleteButton button_word={delete_button} /> <br />
+      <Badge answer={"답변"} />
     </div>
   );
 }
