@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllSubjects } from "../api/userCardApi";
+import { fetchAllSubjects } from "../../../api/userCardApi";
 import "./userCard.css";
 
 function UserCard() {

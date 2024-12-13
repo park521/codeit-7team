@@ -1,5 +1,5 @@
 import React from "react";
-import UserCard from "../../Commons/UserCard";
+import UserCard from "../../components/Commons/UserCard/UserCard";
 import "./questionListPage.css";
 
 function QuestionListPage() {
