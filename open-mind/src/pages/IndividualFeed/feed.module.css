@@ -1,0 +1,128 @@
+/* global 가상 선택자 css 참조 */
+@import url("../../styles/global.css");
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.body_contanier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 헤더 ( 상단 로고 & 프로필 ) */
+
+.header {
+  width: 100%;
+}
+
+.header_background {
+  width: 100%;
+  height: 14.625rem;
+  background-image: url("../../assets/img/image1.svg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_logo {
+  padding-top: 3.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.header_logo_img {
+  width: 10.625rem;
+  height: 4.1875rem;
+}
+
+.header_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profile_img {
+  width: 8.5rem;
+  height: 8.5rem;
+  border-radius: 50%;
+}
+
+.nickname {
+  color: var(--gray60-color);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+/* 피드 내용 */
+
+.main {
+  margin-top: 11.8125rem;
+  width: 716px;
+  height: 1138px;
+  background-color: var(--brown10-color);
+  border: 1px solid var(--brown30-color);
+  border-radius: 1rem;
+}
+
+.question_num {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem 0 1rem 0;
+}
+
+.question_num_text {
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.5625rem;
+  color: var(--brown40-color);
+}
+
+.messages_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding-right: 0.5rem;
+}
+
+.feed_card {
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: var(--gray10-color);
+  box-shadow: var(--box-shadow-1pt);
+  margin: 0 1rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.answer_boolean_text {
+  width: 3.25rem;
+  height: 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--brown40-color);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.25rem;
+  background-color: var(--gray10-color);
+  color: var(--brown40-color);
+}
+
+.feed_question {
+}
+
+.feed_answer {
+}
+
+.feed_favorite {
+}
