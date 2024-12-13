@@ -3,6 +3,7 @@ import linkIcon from "../../../assets/icon/link-white.svg";
 import kakaotalkIcon from "../../../assets/icon/kakaotalk.svg";
 import facebookIcon from "../../../assets/icon/facebook-white.svg";
 
+// [링크 | 카카오톡 | 페이스북] 아이콘 컴포넌트
 function LinkItem() {
   return (
     <div className={styles.links}>
