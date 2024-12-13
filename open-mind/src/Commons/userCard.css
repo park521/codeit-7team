@@ -1,0 +1,37 @@
+.user-card {
+  width: 220px;
+  height: 187px;
+  border: 1px solid #818181; /*글로벌 css로 변경해야됨. (Grayscale/40)*/
+  border-radius: 16px;
+}
+
+.user-card-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.user-image {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+}
+
+.user-name {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 28px;
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  color: #818181; /*글로벌 css로 변경해야됨. (Grayscale/40)*/
+}
+
+.question,
+p {
+  margin: 0;
+}
