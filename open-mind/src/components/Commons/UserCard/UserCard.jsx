@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchAllSubjects } from "../../../api/userCardApi";
 import "./userCard.css";
+import Messages from "../../../assets/icon/messages.svg";
 
 function UserCard() {
   const [subjects, setSubjects] = useState([]);
@@ -31,7 +32,7 @@ function UserCard() {
   }
 
   return (
-    <div>
+    <div className="user-card-grid">
       {subjects.map((subject) => (
         <div key={subject.id} className="user-card">
           <div className="user-card-container">
@@ -42,7 +43,14 @@ function UserCard() {
             />
             <h2 className="user-name">{subject.name}</h2>
             <div className="question">
-              <p>받은 질문 </p>
+              <div className="question-text">
+                <img
+                  src={Messages}
+                  alt="질문 아이콘"
+                  className="question-icon"
+                />
+                <p>받은 질문 </p>
+              </div>
               <p>{subject.questionCount}개</p>
             </div>
           </div>

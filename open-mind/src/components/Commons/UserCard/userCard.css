@@ -1,7 +1,16 @@
+.user-card-grid {
+  display: grid;
+  width: 940px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 20px;
+  margin: 0 auto 40px;
+}
+
 .user-card {
   width: 220px;
   height: 187px;
-  border: 1px solid #818181; /*글로벌 css로 변경해야됨. (Grayscale/40)*/
+  border: 1px solid var(--gray40-color);
   border-radius: 16px;
 }
 
@@ -13,8 +22,8 @@
 
 .user-image {
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   margin-bottom: 12px;
 }
 
@@ -27,11 +36,24 @@
 .question {
   display: flex;
   justify-content: space-between;
+  height: 22px;
   margin: 0;
-  color: #818181; /*글로벌 css로 변경해야됨. (Grayscale/40)*/
+  color: var(--gray40-color);
 }
 
 .question,
 p {
   margin: 0;
+}
+
+.question-text {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.question-icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--gray40-color);
 }
