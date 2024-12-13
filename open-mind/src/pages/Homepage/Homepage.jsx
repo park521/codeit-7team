@@ -1,7 +1,11 @@
 import React from "react";
 
 function Homepage() {
-  return <p>메인 페이지</p>;
+  return (
+    <div>
+      <p>메인 페이지</p>
+    </div>
+  );
 }
 
 export default Homepage;
