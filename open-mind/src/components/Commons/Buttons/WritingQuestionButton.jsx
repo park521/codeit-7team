@@ -2,7 +2,7 @@ import styles from "./button.module.css";
 import Modal from "../Modal/Modal";
 import { useState } from "react";
 
-// 모달창 구현을 위한 질문 작성하기 버튼 모달창 이벤트 적용
+// 모달창 구현을 위한 질문 작성하기 버튼 모달창 이벤트 적용 //
 
 function WritingQuestionButton({ button_word }) {
   const [modal, setModal] = useState(false);
