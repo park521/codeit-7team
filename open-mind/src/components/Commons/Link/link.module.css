@@ -1,3 +1,6 @@
+/* global 가상 선택자 css 참조 */
+@import url("../../../styles/global.css");
+
 body {
   margin: 0;
   box-sizing: border-box;
@@ -13,32 +16,32 @@ body {
 }
 
 .link_item {
-  width: 1.125rem;
-  height: 1.125rem;
-  background-color: #542f1a;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--brown40-color);
   padding: 0.6875rem;
   border-radius: 12.5rem;
 }
 
 .link_item:hover {
-  border: 1px solid black;
+  border: 1px solid var(--gray60-color);
 }
 
 .link_item:active {
   border: none;
-  background-color: #341909;
+  background-color: var(--brown50-color);
 }
 
 .kakaotalk_item {
-  width: 1.125rem;
-  height: 1.125rem;
-  background-color: #fee500;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--yellow50-color);
   padding: 0.6875rem;
   border-radius: 12.5rem;
 }
 
 .kakaotalk_item:hover {
-  border: 1px solid black;
+  border: 1px solid var(--gray60-color);
 }
 
 .kakaotalk_item:active {
@@ -47,15 +50,15 @@ body {
 }
 
 .facebook_item {
-  width: 1.125rem;
-  height: 1.125rem;
-  background-color: #1877f2;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--blue50-color);
   padding: 0.6875rem;
   border-radius: 12.5rem;
 }
 
 .facebook_item:hover {
-  border: 1px solid black;
+  border: 1px solid var(--gray60-color);
 }
 
 .facebook_item:active {
