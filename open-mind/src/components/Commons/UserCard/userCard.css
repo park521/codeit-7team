@@ -57,3 +57,23 @@ p {
   height: 18px;
   fill: var(--gray40-color);
 }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination,
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: var(--gray40-color);
+}
+
+.pagination,
+button:hover {
+  color: var(--gray60-color);
+}
