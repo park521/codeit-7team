@@ -9,7 +9,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getSubjects } from "../../../api/subjectApi/subjectApi";
 import { getQuestionsList } from "../../../api/questionApi/questionApi";
-import { getAnswers } from "../../../api/answerApi/answerApi";
+import { getAnswers, postAnswers } from "../../../api/answerApi/answerApi";
+import FeedCardAnswer from "./FeedCardAnswer";
 
 // 피드 카드 컴포넌트
 function FeedCard() {
@@ -146,6 +147,7 @@ function FeedCard() {
                 </section>
               </section>
             )}
+            <FeedCardAnswer answer={answer} subject={subject}></FeedCardAnswer>
             <section className={styles.feed_favorite}>
               <section className={styles.feed_like}>
                 <img

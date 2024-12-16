@@ -12,7 +12,7 @@ function App() {
           <Route index element={<Homepage />} />
           <Route path="list" element={<QuestionListPage />} />
           <Route path="post/:subjectId" element={<IndividualFeed />} />
-          <Route path="answer" element={<IndividualFeed />} />
+          <Route path="post/:subjectId/answer" element={<IndividualFeed />} />
         </Route>
         {/* test용 페이지라서 따로 빼뒀습니다 */}
         <Route path="/buttontest" element={<ButtonTest />} />
