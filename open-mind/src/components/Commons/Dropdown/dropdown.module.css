@@ -1,10 +1,9 @@
-/* 드롭다운 버튼 스타일 */
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-.dropdown-button {
+.dropdown_button {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -17,25 +16,23 @@
   font-size: 14px;
 }
 
-.dropdown-button:hover {
+.dropdown_button:hover {
   border: 1px solid var(--gray60-color);
   color: var(--gray60-color);
 }
 
-.dropdown-button.active {
+.dropdown_button_active {
   border: 1px solid var(--gray60-color);
   color: var(--gray60-color);
 }
 
-/* 드롭다운 아이콘 스타일 */
-.dropdown-icon {
-  font-size: 14px;
+.dropdown_icon {
+  width: 14px;
+  height: 14px;
   display: inline-block;
-  vertical-align: middle;
 }
 
-/* 드롭다운 메뉴 스타일 */
-.dropdown-menu {
+.dropdown_menu {
   display: none;
   position: absolute;
   background-color: var(--gray10-color);
@@ -45,12 +42,11 @@
   color: var(--gray40-color);
   box-shadow: var(--box-shadow-1pt);
   z-index: 1;
-  list-style-type: none; /* 메뉴 항목의 기본 불릿 제거 */
+  list-style-type: none;
   padding: 0;
 }
 
-/* 드롭다운 메뉴 항목 스타일 */
-.dropdown-menu li {
+.dropdown_menu_item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,17 +55,10 @@
   cursor: pointer;
 }
 
-.dropdown-menu li:hover {
+.dropdown_menu_item:hover {
   color: var(--blue50-color);
 }
 
-/* 드롭다운 메뉴 열기 스타일 */
-.dropdown-menu.show {
-  display: block; /* 메뉴가 열리면 표시 */
-}
-
-.dropdown-icon {
-  width: 14px;
-  height: 14px;
-  display: inline-block;
+.dropdown_menu_show {
+  display: block;
 }

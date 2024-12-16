@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UserCard from "../../components/Commons/UserCard/UserCard";
-import "./questionListPage.css";
+import styles from "./questionListPage.module.css";
 import Logo from "../../assets/logo/logo.svg";
 import GoQuestionButton from "../../components/Commons/Buttons/GoQuestionButton";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import ArrowDownDarkIcon from "../../assets/icon/arrow-down.svg";
 import ArrowUpDarkIcon from "../../assets/icon/arrow-up.svg";
 
 function QuestionListPage() {
-  const [sortType, setSortType] = useState("이름순");
+  const [sortType, setSortType] = useState("최신순");
 
   function handleDropdownChange(selectedValue) {
     setSortType(selectedValue);
@@ -18,19 +18,21 @@ function QuestionListPage() {
 
   return (
     <div>
-      <div className="container">
-        <header className="header">
+      <div className={styles.container}>
+        <header className={styles.header}>
           <Link to={"/"}>
-            <img src={Logo} alt="로고 이미지" className="header-logo" />
+            <img src={Logo} alt="로고 이미지" className={styles.header_logo} />
           </Link>
           <GoQuestionButton button_word="답변하러 가기" />
         </header>
-        <body className="body">
-          <div className="body-top-banner">
-            <h1 className="body-top-banner-text">누구에게 질문할까요?</h1>
+        <body className={styles.body}>
+          <div className={styles.body_top_banner}>
+            <h1 className={styles.body_top_banner_text}>
+              누구에게 질문할까요?
+            </h1>
             <Dropdown
               values={["이름순", "최신순"]}
-              defaultValue="이름순"
+              defaultValue="최신순"
               onChange={handleDropdownChange}
               iconDefault={ArrowDownGrayIcon}
               iconHover={ArrowDownDarkIcon}

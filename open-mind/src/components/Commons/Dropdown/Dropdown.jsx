@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./dropdown.css";
+import styles from "./dropdown.module.css";
 
 // values = 드롭다운 메뉴, 배열 형태로 입력
 // defaultValue = 기본 메뉴
@@ -64,16 +64,16 @@ function Dropdown({
       : iconDefault; // 기본 상태에서는 iconDefault 아이콘
 
   return (
-    <div ref={dropdownRef} className="dropdown">
+    <div ref={dropdownRef} className={styles.dropdown}>
       <button
-        className={`dropdown-button ${isActive ? "active" : ""}`}
+        className={`${styles.dropdown_button} ${isActive ? styles.dropdown_button_active : ""}`}
         onClick={toggleDropdown}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         {iconPosition === "front" && iconToShow && (
           <img
-            className="dropdown-icon"
+            className={styles.dropdown_icon}
             src={iconToShow}
             alt="드롭다운 아이콘"
           />
@@ -81,15 +81,21 @@ function Dropdown({
         {selectedValue}
         {iconPosition === "back" && iconToShow && (
           <img
-            className="dropdown-icon"
+            className={styles.dropdown_icon}
             src={iconToShow}
             alt="드롭다운 아이콘"
           />
         )}
       </button>
-      <ul className={`dropdown-menu ${isOpen ? "show" : ""}`}>
+      <ul
+        className={`${styles.dropdown_menu} ${isOpen ? styles.dropdown_menu_show : ""}`}
+      >
         {values.map((value) => (
-          <li key={value} onClick={() => handleSelect(value)}>
+          <li
+            key={value}
+            className={styles.dropdown_menu_item}
+            onClick={() => handleSelect(value)}
+          >
             {value}
           </li>
         ))}

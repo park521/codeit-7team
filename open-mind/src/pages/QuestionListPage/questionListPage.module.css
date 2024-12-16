@@ -11,19 +11,19 @@
   margin-bottom: 40px;
 }
 
-.header-logo {
+.header_logo {
   width: 146px;
   height: 57px;
 }
 
-.body-top-banner {
+.body_top_banner {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 40px;
 }
 
-.body-top-banner-text {
+.body_top_banner_text {
   font-size: 40px;
   font-weight: 400;
   color: var(--gray60-color);
