@@ -71,9 +71,10 @@ function FeedCardAnswer({ answer, subject }) {
 
   // URL에 'answer'가 포함되어 있는지 확인
   const isAnswerPage = location.pathname.includes("answer");
-  // 데이터 검사
-  if (!answer || !subject) {
-    return <p>데이터가 없습니다.</p>;
+
+  // URL에 'answer'와 데이터 검사
+  if (!isAnswerPage && !answer) {
+    return;
   }
 
   return (
@@ -84,12 +85,14 @@ function FeedCardAnswer({ answer, subject }) {
       <FeedAnswerDetailContainer>
         <FeedAnswerDetail>
           <FeedAnswerUserName>{subject.name}</FeedAnswerUserName>
-          <FeedAnswerCreatedAt>
-            {formatDate(answer.createdAt)}
-          </FeedAnswerCreatedAt>
+          {answer && (
+            <FeedAnswerCreatedAt>
+              {formatDate(answer.createdAt)}
+            </FeedAnswerCreatedAt>
+          )}
         </FeedAnswerDetail>
-        <FeedAnswerContent>{answer.content}</FeedAnswerContent>
-        {isAnswerPage && !answer.content && (
+        {answer && <FeedAnswerContent>{answer.content}</FeedAnswerContent>}
+        {isAnswerPage && !answer && (
           <form>
             <TextArea></TextArea>
             <Button>답변 완료</Button>
