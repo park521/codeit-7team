@@ -111,7 +111,7 @@ body {
   margin-right: 0.5rem;
 }
 
-.feed_list div {
+.feed_list > div {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -126,6 +126,10 @@ body {
   display: flex;
   justify-content: end;
   margin: 3.625rem 1.5rem 1.5rem 0;
+}
+
+.toast_container {
+  margin-top: 2.125rem;
 }
 
 /* 반응형 구현 */
@@ -189,5 +193,9 @@ body {
 
   .writing_question {
     margin: 3rem 1.5rem 1.5rem 0;
+  }
+
+  .toast_container {
+    margin-top: -1rem;
   }
 }
