@@ -14,6 +14,11 @@ const ProfileImage = styled.img`
   height: 3rem;
   border-radius: 50%;
   object-fit: cover;
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    width: 2rem;
+    height: 2rem;
+  }
 `;
 
 const FeedAnswerDetailContainer = styled.div`
@@ -34,12 +39,20 @@ const FeedAnswerUserName = styled.p`
   font-weight: 400;
   font-size: 1.125rem;
   color: var(--gray60-color);
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    font-size: 0.875rem;
+  }
 `;
 
 const FeedAnswerCreatedAt = styled.p`
   font-weight: 500;
   font-size: 0.875rem;
   color: var(--gray40-color);
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    font-size: 0.875rem;
+  }
 `;
 
 const FeedAnswerContent = styled.p`
@@ -66,9 +79,25 @@ const Button = styled.button`
 `;
 
 // 피드 답변
-function FeedCardAnswer({ answer, subject }) {
+function FeedCardAnswer({ answer, subject, onSubmit }) {
+  //const [values, setValues] = useState(INITIAL_VALUES);
+
   const location = useLocation();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append("team", values.content);
+  //   formData.append("isRejected", values.content);
+  //   formData.append("content", values.content);
+  //   formData.append("questionId", values.content);
+  //   try {
+  //     const result = await onSubmit(formData);
+  //     console.log("Submit result:", result);
+  //   } catch (error) {
+  //     console.error("Error submitting answer:", error);
+  //   }
+  // };
   // URL에 'answer'가 포함되어 있는지 확인
   const isAnswerPage = location.pathname.includes("answer");
 
@@ -94,8 +123,8 @@ function FeedCardAnswer({ answer, subject }) {
         {answer && <FeedAnswerContent>{answer.content}</FeedAnswerContent>}
         {isAnswerPage && !answer && (
           <form>
-            <TextArea></TextArea>
-            <Button>답변 완료</Button>
+            <TextArea name="content"></TextArea>
+            <Button type="submit">답변 완료</Button>
           </form>
         )}
       </FeedAnswerDetailContainer>

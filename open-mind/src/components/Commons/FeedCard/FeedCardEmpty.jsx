@@ -1,19 +1,24 @@
 import React from "react";
-import styles from "./feedCard.module.css";
-import emptyImg from "../../../assets/img/image3.svg";
+import styled from "styled-components";
+import { ReactComponent as EmptySvg } from "../../../assets/img/image3.svg";
+
+const QuestionEmpty = styled.div`
+  text-align: center;
+  height: 100%;
+`;
+
+const EmptyImg = styled(EmptySvg)`
+  margin-top: 3.125rem;
+`;
 
 // 빈 피드 카드 컴포넌트
 function FeedCardEmpty() {
   return (
-    <div>
-      <section className={styles.question_empty}>
-        <img
-          src={emptyImg}
-          className={styles.empty_img}
-          alt="아직 질문이 없습니다"
-        />
-      </section>
-    </div>
+    <>
+      <QuestionEmpty>
+        <EmptyImg alt="아직 질문이 없습니다" />
+      </QuestionEmpty>
+    </>
   );
 }
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getSubjects } from "../../../api/subjectApi/subjectApi";
 import { getQuestionsList } from "../../../api/questionApi/questionApi";
+import { postAnswers } from "../../../api/answerApi/answerApi";
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardDownMenu from "./FeedCardDownMenu";
 import FeedCardReaction from "./FeedCardReaction";
@@ -75,6 +76,7 @@ function FeedCard() {
             <FeedCardAnswer
               answer={question.answer}
               subject={subject}
+              onSubmit={postAnswers}
             ></FeedCardAnswer>
             <FeedCardReaction like={question.like} dislike={question.dislike} />
           </FeedCardBox>
