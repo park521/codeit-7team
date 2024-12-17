@@ -7,6 +7,11 @@
   margin: 0 auto 40px;
 }
 
+.subject_link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .user_card {
   width: 220px;
   height: 187px;
@@ -65,7 +70,10 @@ p {
 }
 
 .pagination,
-button,
+.pagination_prev_btn,
+.pagination_next_btn,
+.activePage,
+.pageNum,
 span {
   cursor: pointer;
   background-color: transparent;
@@ -75,11 +83,12 @@ span {
 }
 
 .pagination,
-button:hover {
+.pagination_prev_btn:hover,
+.pagination_next_btn:hover {
   color: var(--gray60-color);
 }
 
-.pagination button.activePage {
+.pagination .activePage {
   color: var(--brown40-color);
 }
 
