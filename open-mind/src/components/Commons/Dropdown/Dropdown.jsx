@@ -57,6 +57,10 @@ function Dropdown({
     setIsHovered(false);
   }
 
+  function handleBlur() {
+    setIsActive(!isActive);
+  }
+
   const iconToShow = isActive
     ? iconActive // 드롭다운 열렸을 때는 iconActive
     : isHovered
@@ -68,6 +72,7 @@ function Dropdown({
       <button
         className={`${styles.dropdown_button} ${isActive ? styles.dropdown_button_active : ""}`}
         onClick={toggleDropdown}
+        onBlur={handleBlur}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

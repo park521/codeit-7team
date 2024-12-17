@@ -65,8 +65,7 @@ p {
 }
 
 .pagination,
-button,
-span {
+button {
   cursor: pointer;
   background-color: transparent;
   border: none;
