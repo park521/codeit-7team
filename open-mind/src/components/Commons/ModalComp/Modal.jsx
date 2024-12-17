@@ -7,8 +7,6 @@ import "./Modal.css";
 export default function Modal({ subjectId, setIsModal }) {
   const [subject, setSubject] = useState({});
   const [question, setQuestion] = useState("");
-  const [profileImage, setProfileImage] = useState("");
-  const [nickname, setNickname] = useState("");
 
   const handleInputChange = (e) => {
     // 질문 작성
@@ -24,14 +22,6 @@ export default function Modal({ subjectId, setIsModal }) {
 
         if (subjectData) {
           setSubject(subjectData);
-
-          if (subjectData.user) {
-            const { nickname, profileImage } = subjectData.user;
-            setNickname(nickname);
-            setProfileImage(profileImage);
-          } else {
-            console.warn("유저 정보가 응답 데이터에 없습니다.");
-          }
         } else {
           setSubject({});
         }
