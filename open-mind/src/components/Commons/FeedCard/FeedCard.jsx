@@ -76,6 +76,7 @@ function FeedCard() {
             <FeedCardAnswer
               answer={question.answer}
               subject={subject}
+              questionId={question.id}
               onSubmit={postAnswers}
             ></FeedCardAnswer>
             <FeedCardReaction like={question.like} dislike={question.dislike} />

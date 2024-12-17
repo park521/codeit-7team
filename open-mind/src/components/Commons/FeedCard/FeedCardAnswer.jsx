@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { formatDate } from "../../../utils/formatData";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 
 const FeedAnswerContainer = styled.div`
   display: flex;
@@ -84,13 +83,18 @@ const INITIAL_VALUES = {
   questionId: "",
   content: "",
   isRejected: true,
-  team: 12 - 7,
+  team: "12-7",
 };
 
 // 피드 답변
-function FeedCardAnswer({ answer, subject, onSubmit }) {
-  const { subjectId } = useParams();
-  const [values, setValues] = useState(INITIAL_VALUES);
+function FeedCardAnswer({
+  answer,
+  subject,
+  onSubmit,
+  questionId,
+  initialValues = INITIAL_VALUES,
+}) {
+  const [values, setValues] = useState(initialValues);
 
   const location = useLocation();
 
@@ -98,16 +102,24 @@ function FeedCardAnswer({ answer, subject, onSubmit }) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("content", values.content);
-    formData.append("questionId", subjectId);
+    formData.append("questionId", questionId);
+    formData.append("isRejected", true);
+    formData.append("team", "12-7");
+    // formData의 값 확인
+    for (let pair of formData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }
+    let result;
     try {
-      const result = await onSubmit(formData);
+      result = await onSubmit(questionId, formData);
       console.log("Submit result:", result);
     } catch (error) {
       console.error("Error submitting answer:", error);
     }
   };
 
-  const handleChange = (name, value) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
