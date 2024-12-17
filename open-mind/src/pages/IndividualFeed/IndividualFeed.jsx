@@ -3,12 +3,13 @@ import styles from "./feed.module.css";
 import logo from "../../assets/logo/logo.svg";
 import LinkItem from "../../components/Commons/Link/LinkItem";
 import messagesIcon from "../../assets/icon/messages-brown.svg";
+import Toast from "../../components/Commons/Toast/Toast";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getSubjects } from "../../api/subjectApi/subjectApi";
 import FeedCard from "../../components/Commons/FeedCard/FeedCard";
 import FeedCardEmpty from "../../components/Commons/FeedCard/FeedCardEmpty";
-import WritingQuestionButton from "../../components/Commons/Buttons/WritingQuestionButton";
+import ParentModal from "../../components/Commons/ModalComp/ParentModal";
 
 const do_question_button = "질문 작성하기"; // desktop & tablet 버튼 텍스트
 const do_question_button_mobile = "질문 작성"; // mobile 버튼 텍스트
@@ -20,6 +21,7 @@ function IndividualFeed() {
   const [buttonWord, setButtonWord] = useState(
     getButtonWord(window.innerWidth)
   );
+  const [toastVisible, setToastVisible] = useState(false); // 토스트 상태
 
   // 화면 크기에 따라 버튼 텍스트 결정 함수
   function getButtonWord(width) {
@@ -56,16 +58,24 @@ function IndividualFeed() {
     fetchSubject();
   }, [subjectId]);
 
+  // 링크 복사 후 토스트 표시
+  const handleCopyToast = () => {
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 5000); // 5초 후 토스트 숨김
+  };
+
   return (
     <div className={styles.body_contanier}>
       <header className={styles.header}>
         <section className={styles.header_background}>
           <section className={styles.header_logo}>
-            <img
-              src={logo}
-              className={styles.header_logo_img}
-              alt="헤더 로고"
-            />
+            <Link to="/">
+              <img
+                src={logo}
+                className={styles.header_logo_img}
+                alt="헤더 로고"
+              />
+            </Link>
           </section>
           <section className={styles.header_content}>
             <img
@@ -74,7 +84,7 @@ function IndividualFeed() {
               alt="프로필 사진"
             />
             <section className={styles.nickname}>{subject.name}</section>
-            <LinkItem />
+            <LinkItem onCopy={handleCopyToast} /> {/* onCopy 전달 */}
           </section>
         </section>
       </header>
@@ -101,8 +111,16 @@ function IndividualFeed() {
           {subject.questionCount !== 0 ? <FeedCard /> : <FeedCardEmpty />}
         </section>
       </main>
+
+      {/* 토스트 메시지 */}
+      {toastVisible && (
+        <div className={styles.toast_container}>
+          <Toast />
+        </div>
+      )}
+
       <section className={styles.writing_question}>
-        <WritingQuestionButton button_word={buttonWord} />
+        <ParentModal button_word={buttonWord} subjectId={subject.id} />
       </section>
     </div>
   );

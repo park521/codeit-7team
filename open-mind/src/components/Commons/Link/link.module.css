@@ -16,6 +16,7 @@ body {
 }
 
 .link_item {
+  border: none;
   width: 2.5rem;
   height: 2.5rem;
   background-color: var(--brown40-color);
@@ -33,6 +34,7 @@ body {
 }
 
 .kakaotalk_item {
+  border: none;
   width: 2.5rem;
   height: 2.5rem;
   background-color: var(--yellow50-color);
@@ -50,6 +52,7 @@ body {
 }
 
 .facebook_item {
+  border: none;
   width: 2.5rem;
   height: 2.5rem;
   background-color: var(--blue50-color);
