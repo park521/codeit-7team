@@ -24,8 +24,12 @@ export async function postSubjects(formData) {
 }
 
 // 질문 대상 목록 조회
-export async function getSubjectsList({ limit = 8, offset = 0 }) {
-  const query = `limit=${limit}&offset=${offset}`;
+export async function getSubjectsList({
+  limit = 8,
+  offset = 0,
+  sort = "time",
+}) {
+  const query = `limit=${limit}&offset=${offset}&sort=${sort}`;
 
   try {
     const response = await fetch(`${BASE_URL}subjects/?${query}`);
