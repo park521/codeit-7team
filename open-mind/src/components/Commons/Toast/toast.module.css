@@ -1,0 +1,17 @@
+/* global 가상 선택자 css 참조 */
+@import url("../../../styles/global.css");
+@import url("https://fonts.googleapis.com/css2?family=Actor&display=swap");
+
+.toast_box {
+  font-family: Pretendard;
+  padding: 12px 12px;
+  border-radius: 0.5rem;
+  width: 10.4375rem;
+  height: 2.625rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  color: var(--gray10-color);
+  background-color: var(--gray60-color);
+  box-shadow: var(--box-shadow-3pt);
+}

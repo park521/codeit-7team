@@ -14,11 +14,11 @@ const EmptyImg = styled(EmptySvg)`
 // 빈 피드 카드 컴포넌트
 function FeedCardEmpty() {
   return (
-    <>
+    <div>
       <QuestionEmpty>
         <EmptyImg alt="아직 질문이 없습니다" />
       </QuestionEmpty>
-    </>
+    </div>
   );
 }
 
