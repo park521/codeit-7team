@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import UserCard from "../../components/commons/UserCard/UserCard";
 import styles from "./questionListPage.module.css";
 import Logo from "../../assets/logo/logo.svg";
-<<<<<<< HEAD
-import GoQuestionButton from "../../components/Commons/Buttons/GoQuestionButton";
 import { Link, useNavigate } from "react-router-dom";
-import Dropdown from "../../components/Commons/Dropdown/Dropdown";
-=======
-import { Link } from "react-router-dom";
 import Dropdown from "../../components/commons/Dropdown/Dropdown";
->>>>>>> origin/develop
 import ArrowDownGrayIcon from "../../assets/icon/arrow-down-gray.svg";
 import ArrowDownDarkIcon from "../../assets/icon/arrow-down.svg";
 import ArrowUpDarkIcon from "../../assets/icon/arrow-up.svg";
@@ -24,8 +18,8 @@ function QuestionListPage() {
   }
 
   const handleGoAnswer = (e) => {
-    e.preventDefault(); // 기본 클릭 이벤트 방지
-    const subjectId = localStorage.getItem("subjectId");
+    e.preventDefault();
+    const subjectId = localStorage.getItem("id");
 
     if (subjectId) {
       navigate(`/post/${subjectId}/answer`); // ID가 있으면 이동
@@ -42,13 +36,11 @@ function QuestionListPage() {
           <Link to={"/"}>
             <img src={Logo} alt="로고 이미지" className={styles.header_logo} />
           </Link>
-<<<<<<< HEAD
-          <div onClick={handleGoAnswer}>
-            <GoQuestionButton button_word="답변하러 가기" />
-          </div>
-=======
-          <DefaultButton innerText="답변하러 가기" hasArrow={true} />
->>>>>>> origin/develop
+          <DefaultButton
+            innerText="답변하러 가기"
+            hasArrow="true"
+            onClick={handleGoAnswer}
+          />
         </header>
         <div className={styles.body}>
           <div className={styles.body_top_banner}>
