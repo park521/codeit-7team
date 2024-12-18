@@ -73,8 +73,7 @@ p {
 .pagination_prev_btn,
 .pagination_next_btn,
 .activePage,
-.pageNum,
-span {
+.pageNum {
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -83,6 +82,7 @@ span {
 }
 
 .pagination,
+.pageNum:hover,
 .pagination_prev_btn:hover,
 .pagination_next_btn:hover {
   color: var(--gray60-color);
