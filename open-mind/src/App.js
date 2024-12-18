@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
-import ButtonTest from "./components/Commons/Buttons/ButtonTest";
+import ButtonTest from "./components/commons/Buttons/ButtonTest";
 import IndividualFeed from "./pages/IndividualFeed/IndividualFeed";
 import QuestionListPage from "./pages/QuestionListPage/QuestionListPage";
 
