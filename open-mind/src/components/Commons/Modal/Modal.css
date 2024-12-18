@@ -1,4 +1,4 @@
-.modalBack {
+.modal_back {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.modalContent {
+.modal_content {
   background-color: var(--gray10-color);
   width: 612px;
   padding: 40px 40px 70px 40px;
@@ -19,41 +19,41 @@
   text-align: center;
 }
 
-.modalHeader {
+.modal_header {
   display: flex;
   justify-content: space-between;
 }
 
-.modalHeaderLeft {
+.modal_header_left {
   display: flex;
   gap: 13px;
 }
 
-.modalHeaderLeft img {
+.modal_header_left img {
   width: 28px;
   height: 28px;
 }
 
-.modalHeader:last-child img {
+.modal_header:last-child img {
   width: 23px;
   height: 23px;
   cursor: pointer;
 }
 
-.modalHeader h2 {
+.modal_header h2 {
   font-size: 24px;
   font-weight: 400;
   line-height: 30px;
   margin: 0;
 }
 
-.modalTo {
+.modal_to {
   margin-top: 40px;
   margin-bottom: 12px;
   display: flex;
 }
 
-.modalTo h4 {
+.modal_to h4 {
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
@@ -61,20 +61,20 @@
   text-align: left;
 }
 
-.modalTo .modalProfileImage {
+.modal_to .modal_profile_image {
   width: 28px;
   height: 28px;
   margin-left: 4px;
   margin-right: 4px;
 }
 
-.modalTo img {
+.modal_to img {
   width: 28px;
   height: 28px;
   border-radius: 50%;
 }
 
-.modalQuestion {
+.modal_question {
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
@@ -99,7 +99,7 @@ input::placeholder {
   padding-top: 0;
 }
 
-.postButton {
+.post_button {
   background-color: var(--brown40-color);
   font-size: 16px;
   font-weight: 400;
@@ -113,43 +113,43 @@ input::placeholder {
   cursor: pointer;
 }
 
-.postButton:disabled {
+.post_button:disabled {
   background-color: var(--brown30-color);
 }
 
-.closeButton {
+.close_button {
   cursor: pointer;
   width: 24px;
   height: 24px;
 }
 
 @media (max-width: 376px) {
-  .modalContent {
+  .modal_content {
     width: 327px;
     padding: 24px;
   }
 
-  .modalHeaderLeft {
+  .modal_header_left {
     gap: 8px;
   }
 
-  .modalHeader h2 {
+  .modal_header h2 {
     font-size: 20px;
     line-height: 25px;
   }
 
-  .modalHeader:last-child img {
+  .modal_header:last-child img {
     width: 22px;
     height: 22px;
   }
 
-  .modalQuestion {
+  .modal_question {
     width: 279px;
     height: 358px;
     padding-bottom: 326px;
   }
 
-  .postButton {
+  .post_button {
     padding: 12px 102.5px;
   }
 }
