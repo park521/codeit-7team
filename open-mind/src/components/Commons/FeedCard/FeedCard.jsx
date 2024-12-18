@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import { getSubjects } from "../../../api/subjectApi/subjectApi";
 import { getQuestionsList } from "../../../api/questionApi/questionApi";
 import { postAnswers } from "../../../api/answerApi/answerApi";
+import FeedCardEditMenu from "./FeedCardEditMenu";
+import FeedCardQuestion from "./FeedCardQuestion";
 import FeedCardAnswer from "./FeedCardAnswer";
-import FeedCardDownMenu from "./FeedCardDownMenu";
 import FeedCardReaction from "./FeedCardReaction";
 
 const FeedCardBox = styled.div`
@@ -72,7 +73,8 @@ function FeedCard() {
       {questions.map((question) => {
         return (
           <FeedCardBox key={question.id}>
-            <FeedCardDownMenu question={question} />
+            <FeedCardEditMenu question={question} />
+            <FeedCardQuestion question={question} />
             <FeedCardAnswer
               answer={question.answer}
               subject={subject}

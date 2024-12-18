@@ -10,7 +10,8 @@ export async function postSubjects(formData) {
   try {
     const response = await fetch(`${BASE_URL}subjects/`, {
       method: "POST",
-      body: formData,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     });
     if (!response.ok) {
       throw new Error(`HTTP response error: ${response.status}`);

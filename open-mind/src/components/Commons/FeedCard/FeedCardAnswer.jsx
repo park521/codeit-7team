@@ -72,6 +72,7 @@ const TextArea = styled.textarea`
   border-radius: 8px;
   background-color: var(--gray20-color);
 `;
+
 const Button = styled.button`
   width: 560px;
   height: 46px;
@@ -79,6 +80,7 @@ const Button = styled.button`
   border-radius: 8px;
 `;
 
+// 여기서부터 코드//
 const INITIAL_VALUES = {
   questionId: "",
   content: "",
@@ -100,15 +102,11 @@ function FeedCardAnswer({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("content", values.content);
-    formData.append("questionId", questionId);
-    formData.append("isRejected", true);
-    formData.append("team", "12-7");
-    // formData의 값 확인
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
+    let formData = { initialValues };
+    formData.content = values.content;
+    formData.questionId = questionId;
+    formData.isRejected = true;
+    formData.team = "12-7";
     let result;
     try {
       result = await onSubmit(questionId, formData);

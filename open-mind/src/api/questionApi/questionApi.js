@@ -15,7 +15,8 @@ export async function postQuestions(subjectId, formData) {
       `${BASE_URL}subjects/${subjectId}/questions/`,
       {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       }
     );
     if (!response.ok) {
@@ -105,7 +106,8 @@ export async function postQuestionsReaction(questionId, formData) {
       `${BASE_URL}questions/${questionId}/reaction/`,
       {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       }
     );
     if (!response.ok) {
