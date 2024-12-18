@@ -12,6 +12,7 @@ import DefaultButton from "../../components/commons/Buttons/DefaultButton";
 function QuestionListPage() {
   const [sortType, setSortType] = useState("최신순");
   const navigate = useNavigate();
+  const values = [{ value: "최신순" }, { value: "이름순" }];
 
   function handleDropdownChange(selectedValue) {
     setSortType(selectedValue);
@@ -48,13 +49,12 @@ function QuestionListPage() {
               누구에게 질문할까요?
             </h1>
             <Dropdown
-              values={["이름순", "최신순"]}
+              values={values}
               defaultValue="최신순"
               onChange={handleDropdownChange}
               iconDefault={ArrowDownGrayIcon}
               iconHover={ArrowDownDarkIcon}
               iconActive={ArrowUpDarkIcon}
-              iconPosition="back"
             />
           </div>
           <UserCard sortType={sortType} />

@@ -63,35 +63,6 @@ p {
   fill: var(--gray40-color);
 }
 
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.pagination,
-.pagination_prev_btn,
-.pagination_next_btn,
-.activePage,
-.pageNum {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
-  color: var(--gray40-color);
-}
-
-.pagination,
-.pageNum:hover,
-.pagination_prev_btn:hover,
-.pagination_next_btn:hover {
-  color: var(--gray60-color);
-}
-
-.pagination .activePage {
-  color: var(--brown40-color);
-}
-
 .loading {
   text-align: center;
   font-size: 30px;
