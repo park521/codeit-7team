@@ -1,36 +1,33 @@
 import React from "react";
 import styles from "./feed.module.css";
 import logo from "../../assets/logo/logo.svg";
-import LinkItem from "../../components/Commons/Link/LinkItem";
+import LinkItem from "../../components/commons/Link/LinkItem";
 import messagesIcon from "../../assets/icon/messages-brown.svg";
-import Toast from "../../components/Commons/Toast/Toast";
+import Toast from "../../components/commons/Toast/Toast";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getSubjects } from "../../api/subjectApi/subjectApi";
-import FeedCard from "../../components/Commons/FeedCard/FeedCard";
-import FeedCardEmpty from "../../components/Commons/FeedCard/FeedCardEmpty";
-import ParentModal from "../../components/Commons/ModalComp/ParentModal";
+import FeedCard from "../../components/commons/FeedCard/FeedCard";
+import FeedCardEmpty from "../../components/commons/FeedCard/FeedCardEmpty";
+import ParentModal from "../../components/commons/ModalComp/ParentModal";
 
 const do_question_button = "질문 작성하기"; // desktop & tablet 버튼 텍스트
 const do_question_button_mobile = "질문 작성"; // mobile 버튼 텍스트
 
 // 개별 피드 페이지
 function IndividualFeed() {
+  // 화면 크기에 따라 버튼 텍스트 결정 함수
+  const getInnerText = (width) => {
+    return width <= 767 ? do_question_button_mobile : do_question_button;
+  };
   const { subjectId } = useParams();
   const [subject, setSubject] = useState([]);
-  const [buttonWord, setButtonWord] = useState(
-    getButtonWord(window.innerWidth)
-  );
+  const [innerText, setInnerText] = useState(getInnerText(window.innerWidth));
   const [toastVisible, setToastVisible] = useState(false); // 토스트 상태
-
-  // 화면 크기에 따라 버튼 텍스트 결정 함수
-  function getButtonWord(width) {
-    return width <= 767 ? do_question_button_mobile : do_question_button;
-  }
 
   useEffect(() => {
     const handleResize = () => {
-      setButtonWord(getButtonWord(window.innerWidth)); // 화면 크기 변경 시 상태 업데이트
+      setInnerText(getInnerText(window.innerWidth)); // 화면 크기 변경 시 상태 업데이트
     };
 
     window.addEventListener("resize", handleResize); // 이벤트 리스너 등록
@@ -120,7 +117,7 @@ function IndividualFeed() {
       )}
 
       <section className={styles.writing_question}>
-        <ParentModal button_word={buttonWord} subjectId={subject.id} />
+        <ParentModal innerText={innerText} subjectId={subject.id} />
       </section>
     </div>
   );
