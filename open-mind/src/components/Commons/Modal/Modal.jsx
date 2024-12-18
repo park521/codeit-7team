@@ -37,40 +37,40 @@ export default function Modal({ subjectId, setIsModal }) {
 
   return (
     <div>
-      <div className="modalBack" onClick={() => setIsModal(false)}>
+      <div className="modal_back" onClick={() => setIsModal(false)}>
         {/*모달 배경을 클릭하면 창 닫기*/}
-        <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+        <div className="modal_content" onClick={(e) => e.stopPropagation()}>
           {" "}
           {/*모달 콘텐츠 영역 내부에서 클릭한 경우에는 모달이 닫히지 않도록*/}
-          <div className="modalHeader">
-            <div className="modalHeaderLeft">
+          <div className="modal_header">
+            <div className="modal_header_left">
               <img src={questionIcon} alt="질문" />
               <h2>질문을 작성하세요</h2>
             </div>
             <img
-              className="closeButton"
+              className="close_button"
               src={closeIcon}
               onClick={() => setIsModal(false)}
               alt="닫기"
             />
           </div>
-          <div className="modalTo">
+          <div className="modal_to">
             <h4>To.</h4>
             <img
-              className="modalProfileImage"
+              className="modal_profile_image"
               src={subject.imageSource}
               alt="프로필 이미지"
             />
             <h4>{subject.name}</h4>
           </div>
           <input
-            className="modalQuestion"
+            className="modal_question"
             placeholder="질문을 입력해주세요"
             value={question}
             onChange={handleInputChange}
           ></input>
           <button
-            className="postButton"
+            className="post_button"
             type="button"
             onClick={handlePost}
             disabled={!question}
