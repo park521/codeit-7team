@@ -1,0 +1,17 @@
+.textarea {
+  outline: none;
+  border: none;
+  background-color: #F9F9F9;
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 11.25rem;
+  padding: 1rem;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-weight: 400;
+  resize: none;
+}
+
+.textarea:focus {
+  outline: 1px solid var(--brown40-color);
+}
