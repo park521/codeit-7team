@@ -3,17 +3,18 @@ import { getSubjects } from "../../../api/subjectApi/subjectApi";
 import questionIcon from "../../../assets/icon/messages.svg";
 import closeIcon from "../../../assets/icon/close.svg";
 import "./Modal.css";
+import InputTextArea from "../InputTextArea/InputTextArea";
 
 export default function Modal({ subjectId, setIsModal }) {
   const [subject, setSubject] = useState({});
   const [question, setQuestion] = useState("");
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (value) => {
     // 질문 작성
-    setQuestion(e.target.value);
+    setQuestion(value);
   };
 
-  const handlePost = () => {}; // 질문 제출
+  const handlePost = () => { }; // 질문 제출
 
   useEffect(() => {
     const fetchSubjectData = async () => {
@@ -63,12 +64,12 @@ export default function Modal({ subjectId, setIsModal }) {
             />
             <h4>{subject.name}</h4>
           </div>
-          <input
+          <InputTextArea
             className="modal_question"
             placeholder="질문을 입력해주세요"
             value={question}
             onChange={handleInputChange}
-          ></input>
+          ></InputTextArea>
           <button
             className="post_button"
             type="button"
