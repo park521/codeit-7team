@@ -9,7 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import { getSubjects } from "../../api/subjectApi/subjectApi";
 import FeedCard from "../../components/commons/FeedCard/FeedCard";
 import FeedCardEmpty from "../../components/commons/FeedCard/FeedCardEmpty";
-import ParentModal from "../../components/commons/ModalComp/ParentModal";
+import ParentModal from "../../components/commons/Modal/ParentModal";
 
 const do_question_button = "질문 작성하기"; // desktop & tablet 버튼 텍스트
 const do_question_button_mobile = "질문 작성"; // mobile 버튼 텍스트
