@@ -21,7 +21,7 @@
   color: var(--gray60-color);
 }
 
-.dropdown_button_active {
+.dropdown_button_open {
   border: 1px solid var(--gray60-color);
   color: var(--gray60-color);
 }
@@ -44,6 +44,7 @@
   z-index: 1;
   list-style-type: none;
   padding: 0;
+  margin-top: 4px;
 }
 
 .dropdown_menu_item {
@@ -61,4 +62,18 @@
 
 .dropdown_menu_show {
   display: block;
+}
+
+/*드롭다운 버튼이 이미지인 경우*/
+
+.dropdown_image_button {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background-color: transparent;
+}
+
+.dropdown_menu_item_image {
+  width: 103px;
+  height: 34px;
 }

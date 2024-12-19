@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./homepage.module.css"
+import styles from "./homepage.module.css";
 import InputField from "../../components/commons/InputField/InputField";
 import DefaultButton from "../../components/commons/Buttons/DefaultButton";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ function Homepage() {
 
   const handleClickChange = () => {
     handleCreateFeed(name, navigate);
-  }
+  };
 
   return (
     <div className={styles.main}>
@@ -28,8 +28,16 @@ function Homepage() {
         </Link>
         <h1 className={styles.main__form_logo}>OPEN MIND 로고</h1>
         <div className={styles.main__form_group}>
-          <InputField value={name} onChange={handleInputChange} />
-          <DefaultButton onClick={handleClickChange} innerText={take_question_button} hasArrow={false} />
+          <InputField
+            value={name}
+            onChange={handleInputChange}
+            placeholder={"이름을 입력하세요"}
+          />
+          <DefaultButton
+            onClick={handleClickChange}
+            innerText={take_question_button}
+            hasArrow={false}
+          />
         </div>
       </div>
     </div>
