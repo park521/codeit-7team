@@ -60,6 +60,19 @@
   color: var(--blue50-color);
 }
 
+.dropdown_item_container {
+  width: 1.5625rem;
+  overflow: hidden;
+}
+
+.dropdown_menu_item:hover .dropdown_item_icon {
+  transform: translateX(-50%)
+}
+
+.dropdown_item_icon {
+  width: 200%;
+}
+
 .dropdown_menu_show {
   display: block;
 }
