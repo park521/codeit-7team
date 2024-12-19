@@ -1,9 +1,10 @@
 import styles from "./button.module.css";
 import rightArrow from "../../../assets/icon/button-box-arrow-right-brown.svg";
-function DefaultButton({ innerText, hasArrow, onClick }) {
+function DefaultButton({ innerText, hasArrow, onClick, type }) {
   const getButtonStyle = () => {
     if (innerText === "질문 받기") return styles.take_question_button;
     if (innerText === "답변 완료") return styles.answer_completed_button;
+    if (innerText === "수정 완료") return styles.answer_completed_button;
     if (innerText === "답변하러 가기") return styles.go_question_button;
     if (innerText === "질문하러 가기") return styles.go_question_button;
     if (innerText === "질문 작성하기") return styles.writing_question_button;
@@ -12,7 +13,7 @@ function DefaultButton({ innerText, hasArrow, onClick }) {
   };
 
   return (
-    <button className={getButtonStyle()} onClick={onClick}>
+    <button className={getButtonStyle()} onClick={onClick} type={type}>
       {innerText}
       {hasArrow ? (
         <img

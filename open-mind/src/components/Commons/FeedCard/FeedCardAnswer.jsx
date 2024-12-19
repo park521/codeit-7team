@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { formatDate } from "../../../utils/formatData";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import DefaultButton from "../Buttons/DefaultButton";
 
 const FeedAnswerContainer = styled.div`
   display: flex;
@@ -82,7 +83,6 @@ const Button = styled.button`
 
 // 여기서부터 코드//
 const INITIAL_VALUES = {
-  questionId: "",
   content: "",
   isRejected: true,
   team: "12-7",
@@ -92,29 +92,49 @@ const INITIAL_VALUES = {
 function FeedCardAnswer({
   answer,
   subject,
-  onSubmit,
+  postAnswers,
+  putAnswers,
   questionId,
   initialValues = INITIAL_VALUES,
 }) {
   const [values, setValues] = useState(initialValues);
+  const [isEditing, setIsEditing] = useState(false);
 
   const location = useLocation();
 
-  const handleSubmit = async (e) => {
+  const handlePost = async (e) => {
     e.preventDefault();
-    let formData = { initialValues };
+    const formData = {
+      ...values,
+    };
     formData.content = values.content;
     formData.questionId = questionId;
-    formData.isRejected = true;
-    formData.team = "12-7";
     let result;
     try {
-      result = await onSubmit(questionId, formData);
+      result = await postAnswers(questionId, formData);
       console.log("Submit result:", result);
     } catch (error) {
-      console.error("Error submitting answer:", error);
+      console.error("Error submitting post answer:", error);
     }
   };
+
+  const handlePut = async (e) => {
+    e.preventDefault();
+    const formData = {
+      ...values,
+    };
+    formData.content = values.content;
+    formData.answerId = answer.id;
+    let result;
+    try {
+      result = await putAnswers(answer.id, formData);
+      console.log("Submit result:", result);
+    } catch (error) {
+      console.error("Error submitting put answer:", error);
+    }
+  };
+
+  const handleEditingClick = () => setIsEditing(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -135,6 +155,7 @@ function FeedCardAnswer({
   return (
     <FeedAnswerContainer>
       <div>
+        <button onClick={handleEditingClick}>123</button>
         <ProfileImage src={subject.imageSource} alt="프로필 사진" />
       </div>
       <FeedAnswerDetailContainer>
@@ -146,15 +167,27 @@ function FeedCardAnswer({
             </FeedAnswerCreatedAt>
           )}
         </FeedAnswerDetail>
-        {answer && <FeedAnswerContent>{answer.content}</FeedAnswerContent>}
+        {answer && !isEditing && (
+          <FeedAnswerContent>{answer.content}</FeedAnswerContent>
+        )}
         {isAnswerPage && !answer && (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handlePost}>
             <TextArea
               name="content"
               value={values.content}
               onChange={handleChange}
             ></TextArea>
-            <Button type="submit">답변 완료</Button>
+            <DefaultButton innerText="답변 완료" type="submit" />
+          </form>
+        )}
+        {isAnswerPage && answer && isEditing && (
+          <form onSubmit={handlePut}>
+            <TextArea
+              name="content"
+              value={values.content}
+              onChange={handleChange}
+            ></TextArea>
+            <DefaultButton innerText="수정 완료" type="submit" />
           </form>
         )}
       </FeedAnswerDetailContainer>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getSubjects } from "../../../api/subjectApi/subjectApi";
 import { getQuestionsList } from "../../../api/questionApi/questionApi";
-import { postAnswers } from "../../../api/answerApi/answerApi";
+import { postAnswers, putAnswers } from "../../../api/answerApi/answerApi";
 import FeedCardEditMenu from "./FeedCardEditMenu";
 import FeedCardQuestion from "./FeedCardQuestion";
 import FeedCardAnswer from "./FeedCardAnswer";
@@ -51,21 +51,39 @@ function FeedCard() {
   }, [subjectId]);
 
   // Fetch Subject Question
-  useEffect(() => {
-    async function fetchSubjectList() {
-      try {
-        const data = await getQuestionsList(subjectId, { limit: 5, offset: 0 });
-        if (data) {
-          setQuestions(data.results); // results 안에 배열이 있을 경우
-        } else {
-          setQuestions([]); // results가 없으면 빈 배열 설정
-        }
-      } catch (error) {
-        console.error("Error fetching subjectList:", error);
+  const fetchQuestionsList = async () => {
+    try {
+      const data = await getQuestionsList(subjectId, { limit: 5, offset: 0 });
+      if (data) {
+        setQuestions(data.results); // results 안에 배열이 있을 경우
+      } else {
+        setQuestions([]); // results가 없으면 빈 배열 설정
       }
+    } catch (error) {
+      console.error("Error fetching subjectList:", error);
     }
+  };
 
-    fetchSubjectList();
+  const handlePostAnswer = async (questionId, formData) => {
+    try {
+      await postAnswers(questionId, formData);
+      await fetchQuestionsList();
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+    }
+  };
+
+  const handlePutAnswers = async (answerId, formData) => {
+    try {
+      await putAnswers(answerId, formData);
+      await fetchQuestionsList();
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuestionsList();
   }, [subjectId]);
 
   return (
@@ -79,7 +97,8 @@ function FeedCard() {
               answer={question.answer}
               subject={subject}
               questionId={question.id}
-              onSubmit={postAnswers}
+              postAnswers={handlePostAnswer}
+              putAnswers={handlePutAnswers}
             ></FeedCardAnswer>
             <FeedCardReaction like={question.like} dislike={question.dislike} />
           </FeedCardBox>
