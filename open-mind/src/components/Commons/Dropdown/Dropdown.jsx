@@ -74,9 +74,8 @@ function Dropdown({
       {/* 버튼이 이미지인지 텍스트인지에 따라 다르게 렌더링 */}
       {!isImageButton ? (
         <button
-          className={`${styles.dropdown_button} ${
-            isOpen ? styles.dropdown_button_open : ""
-          }`}
+          className={`${styles.dropdown_button} ${isOpen ? styles.dropdown_button_open : ""
+            }`}
           onClick={toggleDropdown}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -90,9 +89,8 @@ function Dropdown({
         </button>
       ) : (
         <button
-          className={`${styles.dropdown_image_button} ${
-            isOpen ? styles.dropdown_button_open : ""
-          }`}
+          className={`${styles.dropdown_image_button} ${isOpen ? styles.dropdown_button_open : ""
+            }`}
           onClick={toggleDropdown}
         >
           <img
@@ -103,24 +101,24 @@ function Dropdown({
         </button>
       )}
       <ul
-        className={`${styles.dropdown_menu} ${
-          isOpen ? styles.dropdown_menu_show : ""
-        }`}
+        className={`${styles.dropdown_menu} ${isOpen ? styles.dropdown_menu_show : ""
+          }`}
       >
         {values.map(({ value, icon }) => (
           <li
             key={value}
-            className={`${styles.dropdown_menu_item} ${
-              isImageButton ? styles.dropdown_menu_item_image : ""
-            }`}
+            className={`${styles.dropdown_menu_item} ${isImageButton ? styles.dropdown_menu_item_image : ""
+              }`}
             onClick={() => handleSelect(value)}
           >
             {icon && (
-              <img
-                className={styles.dropdown_item_icon}
-                src={icon}
-                alt={`${value} 아이콘`}
-              />
+              <div className={styles.dropdown_item_container}>
+                <img
+                  className={styles.dropdown_item_icon}
+                  src={icon}
+                  alt={`${value} 아이콘`}
+                />
+              </div>
             )}
             {value}
           </li>

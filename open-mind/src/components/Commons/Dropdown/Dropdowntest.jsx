@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from "./Dropdown";
-import Edit from "../../../assets/icon/edit.svg";
-import Close from "../../../assets/icon/close.svg";
+import Edit from "../../../assets/icon/edit2.png";
+import Close from "../../../assets/icon/close2.png";
 import More from "../../../assets/icon/more.svg";
 
 function Dropdowntest() {
