@@ -174,7 +174,11 @@ function FeedCardAnswer({
               value={values.content}
               onChange={handleChange}
             ></TextArea>
-            <DefaultButton innerText="답변 완료" type="submit" />
+            <DefaultButton
+              innerText="답변 완료"
+              type="submit"
+              disabled={!values.content.trim()}
+            />
           </form>
         )}
         {isAnswerPage && answer && isEditing && (
@@ -184,7 +188,11 @@ function FeedCardAnswer({
               value={values.content}
               onChange={handleChange}
             ></TextArea>
-            <DefaultButton innerText="수정 완료" type="submit" />
+            <DefaultButton
+              innerText="수정 완료"
+              type="submit"
+              disabled={!values.content.trim()}
+            />
           </form>
         )}
       </FeedAnswerDetailContainer>

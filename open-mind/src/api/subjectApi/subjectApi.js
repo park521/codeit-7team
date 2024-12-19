@@ -77,7 +77,7 @@ export async function deleteSubjects(subjectId) {
     if (!response.ok) {
       throw new Error(`HTTP response error: ${response.status}`);
     }
-    const body = await response.json();
+    const body = await response;
     return body;
   } catch (error) {
     console.error("delete subject Error:", error);
