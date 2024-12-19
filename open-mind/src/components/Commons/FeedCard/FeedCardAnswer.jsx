@@ -95,10 +95,10 @@ function FeedCardAnswer({
   postAnswers,
   putAnswers,
   questionId,
+  isEditing,
   initialValues = INITIAL_VALUES,
 }) {
   const [values, setValues] = useState(initialValues);
-  const [isEditing, setIsEditing] = useState(false);
 
   const location = useLocation();
 
@@ -134,8 +134,6 @@ function FeedCardAnswer({
     }
   };
 
-  const handleEditingClick = () => setIsEditing(true);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
@@ -155,7 +153,6 @@ function FeedCardAnswer({
   return (
     <FeedAnswerContainer>
       <div>
-        <button onClick={handleEditingClick}>123</button>
         <ProfileImage src={subject.imageSource} alt="프로필 사진" />
       </div>
       <FeedAnswerDetailContainer>

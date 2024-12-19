@@ -9,13 +9,22 @@ const EditMenu = styled.div`
   align-items: center;
 `;
 
-function FeedCardEditMenu({ question }) {
+function FeedCardEditMenu({
+  question,
+  handleEditingClick,
+  handleDeleteQuestion,
+}) {
   const location = useLocation();
   const isAnswerPage = location.pathname.includes("answer");
   return (
     <EditMenu>
       <Badge answer={question.answer} />
-      {isAnswerPage && <p>...</p>}
+      {isAnswerPage && (
+        <>
+          <button onClick={handleDeleteQuestion}>삭제</button>
+          <button onClick={handleEditingClick}>...</button>
+        </>
+      )}
     </EditMenu>
   );
 }

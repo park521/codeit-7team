@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getSubjects } from "../../../api/subjectApi/subjectApi";
-import { getQuestionsList } from "../../../api/questionApi/questionApi";
+import {
+  getQuestionsList,
+  deleteQuestions,
+} from "../../../api/questionApi/questionApi";
 import { postAnswers, putAnswers } from "../../../api/answerApi/answerApi";
 import FeedCardEditMenu from "./FeedCardEditMenu";
 import FeedCardQuestion from "./FeedCardQuestion";
@@ -31,6 +34,7 @@ function FeedCard() {
   const { subjectId } = useParams();
   const [subject, setSubject] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [editingState, setEditingState] = useState({});
 
   // Fetch Subject
   useEffect(() => {
@@ -67,7 +71,14 @@ function FeedCard() {
   const handlePostAnswer = async (questionId, formData) => {
     try {
       await postAnswers(questionId, formData);
-      await fetchQuestionsList();
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+    }
+  };
+
+  const handleDeleteQuestion = async (questionId) => {
+    try {
+      await deleteQuestions(questionId);
     } catch (error) {
       console.error("Error submitting answer:", error);
     }
@@ -76,22 +87,34 @@ function FeedCard() {
   const handlePutAnswers = async (answerId, formData) => {
     try {
       await putAnswers(answerId, formData);
-      await fetchQuestionsList();
+      setEditingState(false);
     } catch (error) {
       console.error("Error submitting answer:", error);
     }
   };
 
+  const handleEditingClick = (questionId) => {
+    setEditingState((prev) => ({
+      ...prev,
+      [questionId]: !prev[questionId],
+    }));
+  };
+
   useEffect(() => {
     fetchQuestionsList();
-  }, [subjectId]);
+  }, [subjectId, questions]);
 
   return (
     <div>
       {questions.map((question) => {
+        const isEditing = editingState[question.id] || false;
         return (
           <FeedCardBox key={question.id}>
-            <FeedCardEditMenu question={question} />
+            <FeedCardEditMenu
+              question={question}
+              handleEditingClick={() => handleEditingClick(question.id)}
+              handleDeleteQuestion={() => handleDeleteQuestion(question.id)}
+            />
             <FeedCardQuestion question={question} />
             <FeedCardAnswer
               answer={question.answer}
@@ -99,6 +122,7 @@ function FeedCard() {
               questionId={question.id}
               postAnswers={handlePostAnswer}
               putAnswers={handlePutAnswers}
+              isEditing={isEditing}
             ></FeedCardAnswer>
             <FeedCardReaction like={question.like} dislike={question.dislike} />
           </FeedCardBox>
