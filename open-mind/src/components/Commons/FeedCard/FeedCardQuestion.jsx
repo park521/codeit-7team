@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Badge from "../Badge/Badge";
 import { formatDate } from "../../../utils/formatData";
 
 const FeedQuestion = styled.div`
@@ -26,10 +25,9 @@ const FeedQuestionTitle = styled.div`
   }
 `;
 
-function FeedCardDownMenu({ question }) {
+function FeedCardQuestion({ question }) {
   return (
     <>
-      <Badge answer={question.answer} />
       <FeedQuestion>
         <FeedQuestionTime>
           질문 · {formatDate(question.createdAt)}
@@ -40,4 +38,4 @@ function FeedCardDownMenu({ question }) {
   );
 }
 
-export default FeedCardDownMenu;
+export default FeedCardQuestion;

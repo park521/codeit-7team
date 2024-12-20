@@ -1,7 +1,5 @@
 import React from "react";
-import thumbsUpIconOn from "../../../assets/icon/thumbs-up-gray.svg";
 import { ReactComponent as LikeIcon } from "../../../assets/icon/thumbs-up-gray.svg";
-import thumbsDownIconOn from "../../../assets/icon/thumbs-down-gray.svg";
 import { ReactComponent as DisLikeIcon } from "../../../assets/icon/thumbs-down-gray.svg";
 import styled from "styled-components";
 
