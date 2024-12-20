@@ -7,10 +7,12 @@ import Toast from "../../components/commons/Toast/Toast";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getSubjects } from "../../api/subjectApi/subjectApi";
+import { postQuestions } from "../../api/questionApi/questionApi";
 import FeedCard from "../../components/commons/FeedCard/FeedCard";
 import FeedCardEmpty from "../../components/commons/FeedCard/FeedCardEmpty";
-import ParentModal from "../../components/commons/Modal/ParentModal";
-
+import Modal from "../../components/commons/Modal/Modal";
+import DefaultButton from "../../components/commons/Buttons/DefaultButton";
+//바꾸기
 const do_question_button = "질문 작성하기"; // desktop & tablet 버튼 텍스트
 const do_question_button_mobile = "질문 작성"; // mobile 버튼 텍스트
 
@@ -24,6 +26,7 @@ function IndividualFeed() {
   const [subject, setSubject] = useState([]);
   const [innerText, setInnerText] = useState(getInnerText(window.innerWidth));
   const [toastVisible, setToastVisible] = useState(false); // 토스트 상태
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,6 +62,14 @@ function IndividualFeed() {
   const handleCopyToast = () => {
     setToastVisible(true);
     setTimeout(() => setToastVisible(false), 5000); // 5초 후 토스트 숨김
+  };
+
+  const addQuestion = async (subjectId, formData) => {
+    try {
+      await postQuestions(subjectId, formData);
+    } catch (error) {
+      console.error("Error submitting post questions:", error);
+    }
   };
 
   return (
@@ -117,8 +128,20 @@ function IndividualFeed() {
       )}
 
       <section className={styles.writing_question}>
-        <ParentModal innerText={innerText} subjectId={subject.id} />
+        <DefaultButton // 공통화 버튼 불러옴
+          innerText={innerText}
+          hasArrow={false}
+          onClick={() => setIsModalOpen(true)}
+        />
       </section>
+
+      {isModalOpen && (
+        <Modal
+          subject={subject}
+          setIsModal={setIsModalOpen}
+          addQuestion={addQuestion}
+        />
+      )}
     </div>
   );
 }
