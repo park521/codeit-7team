@@ -7,6 +7,7 @@ import Toast from "../../components/commons/Toast/Toast";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getSubjects } from "../../api/subjectApi/subjectApi";
+import { postQuestions } from "../../api/questionApi/questionApi";
 import FeedCard from "../../components/commons/FeedCard/FeedCard";
 import FeedCardEmpty from "../../components/commons/FeedCard/FeedCardEmpty";
 import Modal from "../../components/commons/Modal/Modal";
@@ -61,6 +62,14 @@ function IndividualFeed() {
   const handleCopyToast = () => {
     setToastVisible(true);
     setTimeout(() => setToastVisible(false), 5000); // 5초 후 토스트 숨김
+  };
+
+  const addQuestion = async (subjectId, formData) => {
+    try {
+      await postQuestions(subjectId, formData);
+    } catch (error) {
+      console.error("Error submitting post questions:", error);
+    }
   };
 
   return (
@@ -127,7 +136,11 @@ function IndividualFeed() {
       </section>
 
       {isModalOpen && (
-        <Modal subjectId={subject.id} setIsModal={setIsModalOpen} />
+        <Modal
+          subjectId={subject.id}
+          setIsModal={setIsModalOpen}
+          addQuestion={addQuestion}
+        />
       )}
     </div>
   );
