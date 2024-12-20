@@ -5,8 +5,10 @@ import LinkItem from "../../components/commons/Link/LinkItem";
 import messagesIcon from "../../assets/icon/messages-brown.svg";
 import Toast from "../../components/commons/Toast/Toast";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { getSubjects } from "../../api/subjectApi/subjectApi";
+import { getQuestionsList } from "../../api/questionApi/questionApi";
 import { postQuestions } from "../../api/questionApi/questionApi";
 import FeedCard from "../../components/commons/FeedCard/FeedCard";
 import FeedCardEmpty from "../../components/commons/FeedCard/FeedCardEmpty";
@@ -25,8 +27,11 @@ function IndividualFeed() {
   const { subjectId } = useParams();
   const [subject, setSubject] = useState([]);
   const [innerText, setInnerText] = useState(getInnerText(window.innerWidth));
+  const [questions, setQuestions] = useState([]); // 질문 리스트 상태 추가
   const [toastVisible, setToastVisible] = useState(false); // 토스트 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
+  const isAnswerPage = location.pathname.match(/^\/post\/\d+\/answer$/);
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,20 +47,30 @@ function IndividualFeed() {
 
   // Fetch Subject
   useEffect(() => {
-    async function fetchSubject() {
+    async function fetchSubjectAndQuestions() {
       try {
-        const data = await getSubjects(subjectId);
-        if (data) {
-          setSubject(data);
+        const subjectData = await getSubjects(subjectId);
+        // console.log("Fetched data:", subjectData);
+        if (subjectData) {
+          setSubject(subjectData);
+
+          const limit = subjectData.questionCount;
+          // 질문 리스트 가져오기
+          const questionsData = await getQuestionsList(subjectId, {
+            limit: limit,
+            offset: 0,
+          });
+          setQuestions(questionsData.results || []); // 질문 데이터 업데이트
         } else {
-          setSubject([]);
+          setSubject(null);
+          setQuestions([]);
         }
       } catch (error) {
-        console.error("Error fetching subject:", error);
+        console.error("Error fetching subject or questions:", error);
       }
     }
 
-    fetchSubject();
+    fetchSubjectAndQuestions();
   }, [subjectId]);
 
   // 링크 복사 후 토스트 표시
@@ -66,14 +81,32 @@ function IndividualFeed() {
 
   const addQuestion = async (subjectId, formData) => {
     try {
-      await postQuestions(subjectId, formData);
+      const newQuestion = await postQuestions(subjectId, formData);
+      setQuestions((prev) => [newQuestion, ...prev]);
     } catch (error) {
       console.error("Error submitting post questions:", error);
     }
   };
 
+  if (!subject) {
+    return <div>Loading...</div>; // subject 데이터가 없으면 로딩 화면 표시
+  }
+  // console.log("Question Count:", subject.questionCount);
+  // console.log("Subject Data:", subject);
+  // console.log("Questions State:", questions);
+  // console.log("Questions Length:", questions.length);
   return (
     <div className={styles.body_contanier}>
+      {/* 페이스북 공유 메타 태그 추가 (subject 데이터가 있을 때만 설정) */}
+      <Helmet>
+        <meta property="og:title" content={subject.name} />
+        <meta
+          property="og:description"
+          content="질문을 작성하고 답변을 받아보세요!"
+        />
+        <meta property="og:image" content={subject.imageSource} />
+        <meta property="og:url" content={window.location.href} />
+      </Helmet>
       <header className={styles.header}>
         <section className={styles.header_background}>
           <section className={styles.header_logo}>
@@ -92,7 +125,8 @@ function IndividualFeed() {
               alt="프로필 사진"
             />
             <section className={styles.nickname}>{subject.name}</section>
-            <LinkItem onCopy={handleCopyToast} /> {/* onCopy 전달 */}
+            <LinkItem onCopy={handleCopyToast} subject={subject} />{" "}
+            {/* onCopy 전달 */}
           </section>
         </section>
       </header>
@@ -110,16 +144,20 @@ function IndividualFeed() {
             />
           </section>
           <section className={styles.question_header_text}>
-            {subject.questionCount !== 0
-              ? `${subject.questionCount}개의 질문이 있습니다`
+            {questions.length > 0
+              ? `${questions.length}개의 질문이 있습니다`
               : "아직 질문이 없습니다"}
           </section>
         </section>
         <section className={styles.feed_list}>
-          {subject.questionCount !== 0 ? <FeedCard /> : <FeedCardEmpty />}
+          {questions && questions.length > 0 ? (
+            <FeedCard questions={questions} onUpdateQuestions={setQuestions} />
+          ) : (
+            <FeedCardEmpty />
+          )}
         </section>
       </main>
-
+      {/* 컨플릭해결 */}
       {/* 토스트 메시지 */}
       {toastVisible && (
         <div className={styles.toast_container}>
@@ -127,14 +165,22 @@ function IndividualFeed() {
         </div>
       )}
 
-      <section className={styles.writing_question}>
-        <DefaultButton // 공통화 버튼 불러옴
-          innerText={innerText}
-          hasArrow={false}
-          onClick={() => setIsModalOpen(true)}
-        />
-      </section>
+      {/* 질문 작성 버튼 */}
+      {isAnswerPage ? (
+        <section className={styles.no_question}>
+          {/* 답변 페이지일 때 다른 클래스 적용 */}
+        </section>
+      ) : (
+        <section className={styles.writing_question}>
+          <DefaultButton
+            innerText={innerText}
+            hasArrow={false}
+            onClick={() => setIsModalOpen(true)}
+          />
+        </section>
+      )}
 
+      {/* 모달 */}
       {isModalOpen && (
         <Modal
           subject={subject}
