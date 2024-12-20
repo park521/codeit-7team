@@ -18,7 +18,7 @@ function LinkItem({ onCopy, img, subject }) {
     const facebookURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
       window.location.href
     )}`;
-    window.open(facebookURL, "_blank"); // 페이스북 공유 URL 새 창 열기
+    window.open(facebookURL, "_blank", "width:600px height:600px"); // 페이스북 공유 URL 새 창 열기
   };
 
   return (
