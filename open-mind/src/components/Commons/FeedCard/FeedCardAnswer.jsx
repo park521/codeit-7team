@@ -106,12 +106,11 @@ function FeedCardAnswer({
     e.preventDefault();
     const formData = {
       ...values,
+      content: values.content,
+      questionId: questionId,
     };
-    formData.content = values.content;
-    formData.questionId = questionId;
-    let result;
     try {
-      result = await postAnswers(questionId, formData);
+      await postAnswers(questionId, formData);
     } catch (error) {
       console.error("Error submitting post answer:", error);
     }
@@ -121,12 +120,11 @@ function FeedCardAnswer({
     e.preventDefault();
     const formData = {
       ...values,
+      content: values.content,
+      answerId: answer.id,
     };
-    formData.content = values.content;
-    formData.answerId = answer.id;
-    let result;
     try {
-      result = await putAnswers(answer.id, formData);
+      await putAnswers(answer.id, formData);
     } catch (error) {
       console.error("Error submitting put answer:", error);
     }
@@ -174,7 +172,7 @@ function FeedCardAnswer({
             ></TextArea>
             <DefaultButton
               innerText="답변 완료"
-              type="submit"
+              onClick={handlePost}
               disabled={!values.content.trim()}
             />
           </form>
@@ -188,7 +186,7 @@ function FeedCardAnswer({
             ></TextArea>
             <DefaultButton
               innerText="수정 완료"
-              type="submit"
+              onClick={handlePut}
               disabled={!values.content.trim()}
             />
           </form>
