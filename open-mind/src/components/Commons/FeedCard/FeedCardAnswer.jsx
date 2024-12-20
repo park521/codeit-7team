@@ -112,7 +112,6 @@ function FeedCardAnswer({
     let result;
     try {
       result = await postAnswers(questionId, formData);
-      console.log("Submit result:", result);
     } catch (error) {
       console.error("Error submitting post answer:", error);
     }
@@ -128,7 +127,6 @@ function FeedCardAnswer({
     let result;
     try {
       result = await putAnswers(answer.id, formData);
-      console.log("Submit result:", result);
     } catch (error) {
       console.error("Error submitting put answer:", error);
     }

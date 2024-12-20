@@ -71,6 +71,7 @@ function FeedCard() {
   const handlePostAnswer = async (questionId, formData) => {
     try {
       await postAnswers(questionId, formData);
+      fetchQuestionsList();
     } catch (error) {
       console.error("Error submitting answer:", error);
     }
@@ -79,6 +80,7 @@ function FeedCard() {
   const handleDeleteQuestion = async (questionId) => {
     try {
       await deleteQuestions(questionId);
+      fetchQuestionsList();
     } catch (error) {
       console.error("Error submitting answer:", error);
     }
@@ -88,6 +90,7 @@ function FeedCard() {
     try {
       await putAnswers(answerId, formData);
       setEditingState(false);
+      fetchQuestionsList();
     } catch (error) {
       console.error("Error submitting answer:", error);
     }
@@ -102,7 +105,7 @@ function FeedCard() {
 
   useEffect(() => {
     fetchQuestionsList();
-  }, [subjectId, questions]);
+  }, [subjectId]);
 
   return (
     <div>
