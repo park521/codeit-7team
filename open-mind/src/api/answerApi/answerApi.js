@@ -15,7 +15,8 @@ export async function postAnswers(questionId, formData) {
       `${BASE_URL}questions/${questionId}/answers/`,
       {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       }
     );
     if (!response.ok) {
@@ -81,7 +82,8 @@ export async function putAnswers(answerId, formData) {
   try {
     const response = await fetch(`${BASE_URL}answers/${answerId}/`, {
       method: "PUT",
-      body: formData,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     });
     if (!response.ok) {
       throw new Error(`HTTP response error: ${response.status}`);
@@ -106,7 +108,8 @@ export async function patchAnswers(answerId, formData) {
   try {
     const response = await fetch(`${BASE_URL}answers/${answerId}/`, {
       method: "PATCH",
-      body: formData,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     });
     if (!response.ok) {
       throw new Error(`HTTP response error: ${response.status}`);

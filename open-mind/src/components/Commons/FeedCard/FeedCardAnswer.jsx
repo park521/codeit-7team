@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { formatDate } from "../../../utils/formatData";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import DefaultButton from "../Buttons/DefaultButton";
 
 const FeedAnswerContainer = styled.div`
   display: flex;
@@ -71,6 +73,7 @@ const TextArea = styled.textarea`
   border-radius: 8px;
   background-color: var(--gray20-color);
 `;
+
 const Button = styled.button`
   width: 560px;
   height: 46px;
@@ -78,26 +81,65 @@ const Button = styled.button`
   border-radius: 8px;
 `;
 
+// 여기서부터 코드//
+const INITIAL_VALUES = {
+  content: "",
+  isRejected: true,
+  team: "12-7",
+};
+
 // 피드 답변
-function FeedCardAnswer({ answer, subject, onSubmit }) {
-  //const [values, setValues] = useState(INITIAL_VALUES);
+function FeedCardAnswer({
+  answer,
+  subject,
+  postAnswers,
+  putAnswers,
+  questionId,
+  isEditing,
+  initialValues = INITIAL_VALUES,
+}) {
+  const [values, setValues] = useState(initialValues);
 
   const location = useLocation();
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("team", values.content);
-  //   formData.append("isRejected", values.content);
-  //   formData.append("content", values.content);
-  //   formData.append("questionId", values.content);
-  //   try {
-  //     const result = await onSubmit(formData);
-  //     console.log("Submit result:", result);
-  //   } catch (error) {
-  //     console.error("Error submitting answer:", error);
-  //   }
-  // };
+  const handlePost = async (e) => {
+    e.preventDefault();
+    const formData = {
+      ...values,
+    };
+    formData.content = values.content;
+    formData.questionId = questionId;
+    let result;
+    try {
+      result = await postAnswers(questionId, formData);
+    } catch (error) {
+      console.error("Error submitting post answer:", error);
+    }
+  };
+
+  const handlePut = async (e) => {
+    e.preventDefault();
+    const formData = {
+      ...values,
+    };
+    formData.content = values.content;
+    formData.answerId = answer.id;
+    let result;
+    try {
+      result = await putAnswers(answer.id, formData);
+    } catch (error) {
+      console.error("Error submitting put answer:", error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
   // URL에 'answer'가 포함되어 있는지 확인
   const isAnswerPage = location.pathname.includes("answer");
 
@@ -120,11 +162,35 @@ function FeedCardAnswer({ answer, subject, onSubmit }) {
             </FeedAnswerCreatedAt>
           )}
         </FeedAnswerDetail>
-        {answer && <FeedAnswerContent>{answer.content}</FeedAnswerContent>}
+        {answer && !isEditing && (
+          <FeedAnswerContent>{answer.content}</FeedAnswerContent>
+        )}
         {isAnswerPage && !answer && (
-          <form>
-            <TextArea name="content"></TextArea>
-            <Button type="submit">답변 완료</Button>
+          <form onSubmit={handlePost}>
+            <TextArea
+              name="content"
+              value={values.content}
+              onChange={handleChange}
+            ></TextArea>
+            <DefaultButton
+              innerText="답변 완료"
+              type="submit"
+              disabled={!values.content.trim()}
+            />
+          </form>
+        )}
+        {isAnswerPage && answer && isEditing && (
+          <form onSubmit={handlePut}>
+            <TextArea
+              name="content"
+              value={values.content}
+              onChange={handleChange}
+            ></TextArea>
+            <DefaultButton
+              innerText="수정 완료"
+              type="submit"
+              disabled={!values.content.trim()}
+            />
           </form>
         )}
       </FeedAnswerDetailContainer>
