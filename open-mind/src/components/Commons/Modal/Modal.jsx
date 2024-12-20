@@ -4,7 +4,7 @@ import questionIcon from "../../../assets/icon/messages.svg";
 import closeIcon from "../../../assets/icon/close.svg";
 import "./Modal.css";
 
-export default function Modal({ subjectId, setIsModal }) {
+export default function Modal({ subjectId, setIsModal, addQuestion }) {
   const [subject, setSubject] = useState({});
   const [question, setQuestion] = useState("");
 
@@ -13,13 +13,17 @@ export default function Modal({ subjectId, setIsModal }) {
     setQuestion(e.target.value);
   };
 
-  const handlePost = () => {}; // 질문 제출
+  const handlePost = () => {
+    if (question.trim()) {
+      addQuestion(question);
+      setIsModal(false);
+    }
+  }; // 질문 제출
 
   useEffect(() => {
     const fetchSubjectData = async () => {
       try {
         const subjectData = await getSubjects(subjectId);
-
         if (subjectData) {
           setSubject(subjectData);
         } else {
@@ -40,7 +44,6 @@ export default function Modal({ subjectId, setIsModal }) {
       <div className="modal_back" onClick={() => setIsModal(false)}>
         {/*모달 배경을 클릭하면 창 닫기*/}
         <div className="modal_content" onClick={(e) => e.stopPropagation()}>
-          {" "}
           {/*모달 콘텐츠 영역 내부에서 클릭한 경우에는 모달이 닫히지 않도록*/}
           <div className="modal_header">
             <div className="modal_header_left">

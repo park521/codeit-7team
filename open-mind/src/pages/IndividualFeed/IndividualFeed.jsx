@@ -9,21 +9,32 @@ import { Link, useParams } from "react-router-dom";
 import { getSubjects } from "../../api/subjectApi/subjectApi";
 import FeedCard from "../../components/commons/FeedCard/FeedCard";
 import FeedCardEmpty from "../../components/commons/FeedCard/FeedCardEmpty";
-import ParentModal from "../../components/commons/Modal/ParentModal";
+import Modal from "../../components/commons/Modal/Modal";
+import DefaultButton from "../../components/commons/Buttons/DefaultButton";
+// import ParentModal from "../../components/commons/Modal/ParentModal";
 
 const do_question_button = "질문 작성하기"; // desktop & tablet 버튼 텍스트
 const do_question_button_mobile = "질문 작성"; // mobile 버튼 텍스트
+const getInnerText = (width) => {
+  return width <= 767 ? do_question_button_mobile : do_question_button;
+};
 
 // 개별 피드 페이지
 function IndividualFeed() {
   // 화면 크기에 따라 버튼 텍스트 결정 함수
-  const getInnerText = (width) => {
-    return width <= 767 ? do_question_button_mobile : do_question_button;
-  };
   const { subjectId } = useParams();
   const [subject, setSubject] = useState([]);
   const [innerText, setInnerText] = useState(getInnerText(window.innerWidth));
   const [toastVisible, setToastVisible] = useState(false); // 토스트 상태
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+  const [questions, setQuestions] = useState([]); // 질문 목록
+
+  const addQuestion = (newQuestion) => {
+    setQuestions((prevQuestions) => [
+      ...prevQuestions,
+      { id: prevQuestions.length + 1, content: newQuestion },
+    ]);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,11 +53,7 @@ function IndividualFeed() {
     async function fetchSubject() {
       try {
         const data = await getSubjects(subjectId);
-        if (data) {
-          setSubject(data);
-        } else {
-          setSubject([]);
-        }
+        setSubject(data || {});
       } catch (error) {
         console.error("Error fetching subject:", error);
       }
@@ -85,11 +92,7 @@ function IndividualFeed() {
           </section>
         </section>
       </header>
-      <main
-        className={
-          subject.questionCount !== 0 ? styles.main : styles.empty_main
-        }
-      >
+      <main className={questions.length > 0 ? styles.main : styles.empty_main}>
         <section className={styles.question_header}>
           <section>
             <img
@@ -99,13 +102,17 @@ function IndividualFeed() {
             />
           </section>
           <section className={styles.question_header_text}>
-            {subject.questionCount !== 0
+            {subject.questionCount > 0
               ? `${subject.questionCount}개의 질문이 있습니다`
               : "아직 질문이 없습니다"}
           </section>
         </section>
         <section className={styles.feed_list}>
-          {subject.questionCount !== 0 ? <FeedCard /> : <FeedCardEmpty />}
+          {questions.length > 0 ? (
+            questions.map((q) => <FeedCard key={q.id} question={q.content} />)
+          ) : (
+            <FeedCardEmpty />
+          )}
         </section>
       </main>
 
@@ -115,10 +122,32 @@ function IndividualFeed() {
           <Toast />
         </div>
       )}
+      {/* <section className={styles.writing_question}>
+        <ParentModal // ParentModal.jsx 굳이 안 써도 될 거 같아서 빼는 방법으로 바꿔봄
+          innerText={innerText}
+          subjectId={subject.id}
+          addQuestion={addQuestion}
+        />
+      </section>
+    </div>
+  );
+} */}
 
       <section className={styles.writing_question}>
-        <ParentModal innerText={innerText} subjectId={subject.id} />
+        <DefaultButton // 공통화 버튼 불러옴
+          innerText={innerText}
+          hasArrow={false}
+          onClick={() => setIsModalOpen(true)}
+        />
       </section>
+
+      {isModalOpen && (
+        <Modal
+          subjectId={subject.id}
+          setIsModal={setIsModalOpen}
+          addQuestion={addQuestion}
+        />
+      )}
     </div>
   );
 }
