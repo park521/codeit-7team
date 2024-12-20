@@ -30,7 +30,7 @@ const FeedCardBox = styled.div`
 `;
 
 // 피드 카드 컴포넌트
-function FeedCard({ questions: parentQuestions, onUpdateQuestions }) {
+function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
   const { subjectId } = useParams();
   const [subject, setSubject] = useState([]);
   const [questions, setQuestions] = useState([]); // 질문 리스트 상태
@@ -96,12 +96,16 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions }) {
       // API를 통해 질문 삭제
       await deleteQuestions(questionId);
 
-      // 질문 삭제 후 상태에서 해당 질문을 필터링하여 제거
-      setQuestions((prev) => prev.filter((q) => q.id !== questionId));
+      // 삭제 후 상태에서 해당 질문을 필터링하여 제거
+      const updatedQuestions = questions.filter(
+        (question) => question.id !== questionId
+      );
+      onUpdateQuestions(updatedQuestions); // 상태 업데이트
 
-      // 상태를 갱신하여 화면에 반영
-      if (onUpdateQuestions)
-        onUpdateQuestions(questions.filter((q) => q.id !== questionId));
+      // 질문이 하나도 없으면 onDelete 호출
+      if (updatedQuestions.length === 0) {
+        onDelete(); // 질문 삭제 후 empty_main 클래스를 적용
+      }
     } catch (error) {
       console.error("Error deleting question:", error);
     }

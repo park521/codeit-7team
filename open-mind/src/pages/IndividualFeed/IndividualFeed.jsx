@@ -83,9 +83,22 @@ function IndividualFeed() {
     try {
       const newQuestion = await postQuestions(subjectId, formData);
       setQuestions((prev) => [newQuestion, ...prev]);
+
+      // 업데이트된 questionCount 값에 따라 main 클래스 변경
+      setSubject((prev) => ({
+        ...prev,
+        questionCount: prev.questionCount + 1, // 질문 수 증가
+      }));
     } catch (error) {
       console.error("Error submitting post questions:", error);
     }
+  };
+
+  const handleDelete = () => {
+    setSubject((prev) => ({
+      ...prev,
+      questionCount: 0, // 질문이 없으므로 0으로 설정
+    }));
   };
 
   if (!subject) {
@@ -131,9 +144,7 @@ function IndividualFeed() {
         </section>
       </header>
       <main
-        className={
-          subject.questionCount !== 0 ? styles.main : styles.empty_main
-        }
+        className={subject.questionCount > 0 ? styles.main : styles.empty_main}
       >
         <section className={styles.question_header}>
           <section>
@@ -151,7 +162,11 @@ function IndividualFeed() {
         </section>
         <section className={styles.feed_list}>
           {questions && questions.length > 0 ? (
-            <FeedCard questions={questions} onUpdateQuestions={setQuestions} />
+            <FeedCard
+              questions={questions}
+              onUpdateQuestions={setQuestions}
+              onDelete={handleDelete}
+            />
           ) : (
             <FeedCardEmpty />
           )}
