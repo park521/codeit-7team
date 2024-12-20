@@ -106,7 +106,8 @@ body {
   font-family: Pretendard;
   width: 10.0625rem;
   height: 2.875rem;
-  border: 1px solid var(--brown40-color);
+  outline: 1px solid var(--brown40-color);
+  border: none;
   border-radius: 0.5rem;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
@@ -119,14 +120,14 @@ body {
 }
 
 .go_question_button:hover {
-  border: 2px solid var(--brown40-color);
+  outline: 2px solid var(--brown40-color);
 }
 
 .go_question_button:active {
   background-color: var(--brown20-color);
 }
 
-.go_question_button > img {
+.go_question_button>img {
   position: absolute;
 }
 
