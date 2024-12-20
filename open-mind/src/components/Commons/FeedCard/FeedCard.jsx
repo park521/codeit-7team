@@ -3,10 +3,14 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getSubjects } from "../../../api/subjectApi/subjectApi";
-import { getQuestionsList } from "../../../api/questionApi/questionApi";
-import { postAnswers } from "../../../api/answerApi/answerApi";
+import {
+  getQuestionsList,
+  deleteQuestions,
+} from "../../../api/questionApi/questionApi";
+import { postAnswers, putAnswers } from "../../../api/answerApi/answerApi";
+import FeedCardEditMenu from "./FeedCardEditMenu";
+import FeedCardQuestion from "./FeedCardQuestion";
 import FeedCardAnswer from "./FeedCardAnswer";
-import FeedCardDownMenu from "./FeedCardDownMenu";
 import FeedCardReaction from "./FeedCardReaction";
 
 const FeedCardBox = styled.div`
@@ -30,6 +34,7 @@ function FeedCard() {
   const { subjectId } = useParams();
   const [subject, setSubject] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [editingState, setEditingState] = useState({});
 
   // Fetch Subject
   useEffect(() => {
@@ -50,33 +55,77 @@ function FeedCard() {
   }, [subjectId]);
 
   // Fetch Subject Question
-  useEffect(() => {
-    async function fetchSubjectList() {
-      try {
-        const data = await getQuestionsList(subjectId, { limit: 5, offset: 0 });
-        if (data) {
-          setQuestions(data.results); // results 안에 배열이 있을 경우
-        } else {
-          setQuestions([]); // results가 없으면 빈 배열 설정
-        }
-      } catch (error) {
-        console.error("Error fetching subjectList:", error);
+  const fetchQuestionsList = async () => {
+    try {
+      const data = await getQuestionsList(subjectId, { limit: 5, offset: 0 });
+      if (data) {
+        setQuestions(data.results); // results 안에 배열이 있을 경우
+      } else {
+        setQuestions([]); // results가 없으면 빈 배열 설정
       }
+    } catch (error) {
+      console.error("Error fetching subjectList:", error);
     }
+  };
 
-    fetchSubjectList();
+  const handlePostAnswer = async (questionId, formData) => {
+    try {
+      await postAnswers(questionId, formData);
+      fetchQuestionsList();
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+    }
+  };
+
+  const handleDeleteQuestion = async (questionId) => {
+    try {
+      await deleteQuestions(questionId);
+      fetchQuestionsList();
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+    }
+  };
+
+  const handlePutAnswers = async (answerId, formData) => {
+    try {
+      await putAnswers(answerId, formData);
+      setEditingState(false);
+      fetchQuestionsList();
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+    }
+  };
+
+  const handleEditingClick = (questionId) => {
+    setEditingState((prev) => ({
+      ...prev,
+      [questionId]: !prev[questionId],
+    }));
+  };
+
+  useEffect(() => {
+    fetchQuestionsList();
   }, [subjectId]);
 
   return (
     <div>
       {questions.map((question) => {
+        const isEditing = editingState[question.id] || false;
         return (
           <FeedCardBox key={question.id}>
-            <FeedCardDownMenu question={question} />
+            <FeedCardEditMenu
+              question={question}
+              handleEditingClick={() => handleEditingClick(question.id)}
+              handleDeleteQuestion={() => handleDeleteQuestion(question.id)}
+            />
+            <FeedCardQuestion question={question} />
             <FeedCardAnswer
               answer={question.answer}
               subject={subject}
-              onSubmit={postAnswers}
+              questionId={question.id}
+              postAnswers={handlePostAnswer}
+              putAnswers={handlePutAnswers}
+              isEditing={isEditing}
             ></FeedCardAnswer>
             <FeedCardReaction like={question.like} dislike={question.dislike} />
           </FeedCardBox>
