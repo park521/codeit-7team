@@ -1,6 +1,6 @@
 import styles from "./button.module.css";
 import rightArrow from "../../../assets/icon/button-box-arrow-right-brown.svg";
-function DefaultButton({ innerText, hasArrow, onClick }) {
+function DefaultButton({ innerText, hasArrow, onClick, disabled }) {
   const getButtonStyle = () => {
     if (innerText === "질문 받기") return styles.take_question_button;
     if (innerText === "답변 완료") return styles.answer_completed_button;
@@ -13,7 +13,11 @@ function DefaultButton({ innerText, hasArrow, onClick }) {
   };
 
   return (
-    <button className={getButtonStyle()} onClick={onClick}>
+    <button
+      className={`${getButtonStyle()} ${disabled ? styles.disabled : ""}`}
+      onClick={disabled ? null : onClick}
+      disabled={disabled}
+    >
       {innerText}
       {hasArrow ? (
         <img

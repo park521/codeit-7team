@@ -30,10 +30,10 @@ const FeedCardBox = styled.div`
 `;
 
 // 피드 카드 컴포넌트
-function FeedCard() {
+function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
   const { subjectId } = useParams();
   const [subject, setSubject] = useState([]);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState([]); // 질문 리스트 상태
   const [editingState, setEditingState] = useState({});
 
   // Fetch Subject
@@ -44,7 +44,7 @@ function FeedCard() {
         if (data) {
           setSubject(data); // data 안에 배열이 있을 경우
         } else {
-          setSubject([]); // data가가 없으면 빈 배열 설정
+          setSubject([]); // data가 없으면 빈 배열 설정
         }
       } catch (error) {
         console.error("Error fetching subject:", error);
@@ -55,13 +55,27 @@ function FeedCard() {
   }, [subjectId]);
 
   // Fetch Subject Question
+  useEffect(() => {
+    // parentQuestions가 존재하지 않으면 fetchQuestionsList 호출
+    if (!parentQuestions || parentQuestions.length === 0) {
+      fetchQuestionsList();
+    } else {
+      setQuestions(parentQuestions); // parentQuestions가 있으면 바로 사용
+    }
+  }, [subjectId, parentQuestions]);
+
   const fetchQuestionsList = async () => {
     try {
       const data = await getQuestionsList(subjectId, { limit: 5, offset: 0 });
       if (data) {
-        setQuestions(data.results); // results 안에 배열이 있을 경우
+        // 데이터를 최신순으로 정렬 (내림차순)
+        const sortedQuestions = data.results.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setQuestions(sortedQuestions); // 정렬된 결과 저장
+        if (onUpdateQuestions) onUpdateQuestions(sortedQuestions);
       } else {
-        setQuestions([]); // results가 없으면 빈 배열 설정
+        setQuestions([]); // 결과가 없으면 빈 배열 설정
       }
     } catch (error) {
       console.error("Error fetching subjectList:", error);
@@ -79,10 +93,21 @@ function FeedCard() {
 
   const handleDeleteQuestion = async (questionId) => {
     try {
+      // API를 통해 질문 삭제
       await deleteQuestions(questionId);
-      fetchQuestionsList();
+
+      // 삭제 후 상태에서 해당 질문을 필터링하여 제거
+      const updatedQuestions = questions.filter(
+        (question) => question.id !== questionId
+      );
+      onUpdateQuestions(updatedQuestions); // 상태 업데이트
+
+      // 질문이 하나도 없으면 onDelete 호출
+      if (updatedQuestions.length === 0) {
+        onDelete(); // 질문 삭제 후 empty_main 클래스를 적용
+      }
     } catch (error) {
-      console.error("Error submitting answer:", error);
+      console.error("Error deleting question:", error);
     }
   };
 
@@ -103,34 +128,37 @@ function FeedCard() {
     }));
   };
 
-  useEffect(() => {
-    fetchQuestionsList();
-  }, [subjectId]);
-
   return (
     <div>
-      {questions.map((question) => {
-        const isEditing = editingState[question.id] || false;
-        return (
-          <FeedCardBox key={question.id}>
-            <FeedCardEditMenu
-              question={question}
-              handleEditingClick={() => handleEditingClick(question.id)}
-              handleDeleteQuestion={() => handleDeleteQuestion(question.id)}
-            />
-            <FeedCardQuestion question={question} />
-            <FeedCardAnswer
-              answer={question.answer}
-              subject={subject}
-              questionId={question.id}
-              postAnswers={handlePostAnswer}
-              putAnswers={handlePutAnswers}
-              isEditing={isEditing}
-            ></FeedCardAnswer>
-            <FeedCardReaction like={question.like} dislike={question.dislike} />
-          </FeedCardBox>
-        );
-      })}
+      {questions.length > 0 ? (
+        questions.map((question) => {
+          const isEditing = editingState[question.id] || false;
+          return (
+            <FeedCardBox key={question.id}>
+              <FeedCardEditMenu
+                question={question}
+                handleEditingClick={() => handleEditingClick(question.id)}
+                handleDeleteQuestion={() => handleDeleteQuestion(question.id)}
+              />
+              <FeedCardQuestion question={question} />
+              <FeedCardAnswer
+                answer={question.answer}
+                subject={subject}
+                questionId={question.id}
+                postAnswers={handlePostAnswer}
+                putAnswers={handlePutAnswers}
+                isEditing={isEditing}
+              />
+              <FeedCardReaction
+                like={question.like}
+                dislike={question.dislike}
+              />
+            </FeedCardBox>
+          );
+        })
+      ) : (
+        <div>No questions available</div> // 질문이 없을 경우 표시할 메시지
+      )}
     </div>
   );
 }

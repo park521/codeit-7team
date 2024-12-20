@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import questionIcon from "../../../assets/icon/messages.svg";
 import closeIcon from "../../../assets/icon/close.svg";
+import TextArea from "../InputTextArea/InputTextArea";
 import "./Modal.css";
 
 const INITIAL_VALUES = {
@@ -8,7 +9,7 @@ const INITIAL_VALUES = {
   like: 1,
   dislike: 1,
   answer: {
-    content: "string",
+    content: "",
     isRejected: true,
   },
 };
@@ -24,12 +25,13 @@ export default function Modal({
     e.preventDefault();
     const formData = {
       ...values,
+      content: values.content,
+      subjectId: subject.id,
     };
-    formData.content = values.content;
-    formData.subjectId = subject.id;
-    let result;
+
     try {
-      result = await addQuestion(subject.id, formData);
+      await addQuestion(subject.id, formData);
+      setIsModal(false);
     } catch (error) {
       console.error("Error submitting post answer:", error);
     }
@@ -71,13 +73,14 @@ export default function Modal({
             <h4>{subject.name}</h4>
           </div>
           <form onSubmit={handlePost}>
-            <textArea
+            <TextArea
               name="content"
               className="modal_question"
               placeholder="질문을 입력해주세요"
               value={values.content}
               onChange={handleChange}
-            ></textArea>
+            />
+
             <button
               className="post_button"
               type="submit"
