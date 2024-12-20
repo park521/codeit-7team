@@ -74,3 +74,14 @@ p {
   font-size: 30px;
   font-weight: bold;
 }
+
+/* 태블릿 전용 스타일 */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .grid_container {
+    place-items: center;
+  }
+}
+
+/* 모바일 전용 스타일 */
+@media screen and (min-width: 375px) and (max-width: 767px) {
+}

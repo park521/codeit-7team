@@ -1,19 +1,22 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin: 40px 130px auto;
+  max-width: 1200px;
+  margin: 40px auto;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  max-width: 940px;
+  margin: 0 130px;
 }
 
 .header_logo {
   width: 146px;
   height: 57px;
+  flex-shrink: 0;
 }
 
 .body_top_banner {
@@ -28,4 +31,33 @@
   font-weight: 400;
   color: var(--gray60-color);
   margin: 0 0 12px;
+}
+
+/* 태블릿 전용 스타일 */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .header {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 850px;
+    padding: 0 50px;
+  }
+}
+
+/* 모바일 전용 스타일 */
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .header {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .body_top_banner {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 52px 24px 16px;
+  }
+
+  .body_top_banner_text {
+    font-size: 24px;
+    margin: 0;
+  }
 }

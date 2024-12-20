@@ -74,6 +74,12 @@
 }
 
 .dropdown_menu_item_image {
+  display: flex;
   width: 103px;
   height: 34px;
+  gap: 8px;
+}
+.dropdown_item_icon {
+  width: 14px;
+  height: 14px;
 }
