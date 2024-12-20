@@ -137,7 +137,7 @@ function IndividualFeed() {
 
       {isModalOpen && (
         <Modal
-          subjectId={subject.id}
+          subject={subject}
           setIsModal={setIsModalOpen}
           addQuestion={addQuestion}
         />
