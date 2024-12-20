@@ -25,7 +25,7 @@ body {
 }
 
 .link_item:hover {
-  border: 1px solid var(--gray60-color);
+  outline: 1px solid var(--gray60-color);
 }
 
 .link_item:active {
@@ -43,7 +43,7 @@ body {
 }
 
 .kakaotalk_item:hover {
-  border: 1px solid var(--gray60-color);
+  outline: 1px solid var(--gray60-color);
 }
 
 .kakaotalk_item:active {
@@ -61,7 +61,7 @@ body {
 }
 
 .facebook_item:hover {
-  border: 1px solid var(--gray60-color);
+  outline: 1px solid var(--gray60-color);
 }
 
 .facebook_item:active {
