@@ -27,9 +27,11 @@ export default function Modal({
     };
     formData.content = values.content;
     formData.subjectId = subject.id;
+
     let result;
     try {
       result = await addQuestion(subject.id, formData);
+      setIsModal(false); // 질문 보내기 누르면 창 닫기
     } catch (error) {
       console.error("Error submitting post answer:", error);
     }
