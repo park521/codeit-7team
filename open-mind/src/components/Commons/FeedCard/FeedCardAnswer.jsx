@@ -96,6 +96,7 @@ function FeedCardAnswer({
   putAnswers,
   questionId,
   isEditing,
+  isReject,
   initialValues = INITIAL_VALUES,
 }) {
   const [values, setValues] = useState(initialValues);
@@ -191,6 +192,11 @@ function FeedCardAnswer({
               type="submit"
               disabled={!values.content.trim()}
             />
+          </form>
+        )}
+        {isAnswerPage && answer && isReject && (
+          <form>
+            <p>답변 거절</p>
           </form>
         )}
       </FeedAnswerDetailContainer>

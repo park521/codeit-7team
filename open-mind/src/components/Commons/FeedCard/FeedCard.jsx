@@ -35,6 +35,7 @@ function FeedCard() {
   const [subject, setSubject] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [editingState, setEditingState] = useState({});
+  const [isReject, setIsReject] = useState(false);
 
   // Fetch Subject
   useEffect(() => {
@@ -117,6 +118,7 @@ function FeedCard() {
               question={question}
               handleEditingClick={() => handleEditingClick(question.id)}
               handleDeleteQuestion={() => handleDeleteQuestion(question.id)}
+              setIsReject={setIsReject}
             />
             <FeedCardQuestion question={question} />
             <FeedCardAnswer
@@ -126,6 +128,7 @@ function FeedCard() {
               postAnswers={handlePostAnswer}
               putAnswers={handlePutAnswers}
               isEditing={isEditing}
+              isReject={isReject}
             ></FeedCardAnswer>
             <FeedCardReaction like={question.like} dislike={question.dislike} />
           </FeedCardBox>
