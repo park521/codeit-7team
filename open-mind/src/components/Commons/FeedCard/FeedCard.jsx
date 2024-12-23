@@ -7,7 +7,11 @@ import {
   getQuestionsList,
   deleteQuestions,
 } from "../../../api/questionApi/questionApi";
-import { postAnswers, putAnswers } from "../../../api/answerApi/answerApi";
+import {
+  postAnswers,
+  putAnswers,
+  patchAnswers,
+} from "../../../api/answerApi/answerApi";
 import FeedCardEditMenu from "./FeedCardEditMenu";
 import FeedCardQuestion from "./FeedCardQuestion";
 import FeedCardAnswer from "./FeedCardAnswer";
@@ -35,7 +39,6 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
   const [subject, setSubject] = useState([]);
   const [questions, setQuestions] = useState([]); // 질문 리스트 상태
   const [editingState, setEditingState] = useState({});
-  const [isReject, setIsReject] = useState(false);
 
   // Fetch Subject
   useEffect(() => {
@@ -122,6 +125,16 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
     }
   };
 
+  const handlePatchAnswers = async (answerId, formData) => {
+    try {
+      await patchAnswers(answerId, formData);
+      setEditingState(false);
+      fetchQuestionsList();
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+    }
+  };
+
   const handleEditingClick = (questionId) => {
     setEditingState((prev) => ({
       ...prev,
@@ -137,10 +150,12 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
           return (
             <FeedCardBox key={question.id}>
               <FeedCardEditMenu
+                answer={question.answer}
                 question={question}
                 handleEditingClick={() => handleEditingClick(question.id)}
                 handleDeleteQuestion={() => handleDeleteQuestion(question.id)}
-                setIsReject={setIsReject}
+                postAnswers={handlePostAnswer}
+                patchAnswers={handlePatchAnswers}
               />
               <FeedCardQuestion question={question} />
               <FeedCardAnswer
@@ -150,7 +165,6 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
                 postAnswers={handlePostAnswer}
                 putAnswers={handlePutAnswers}
                 isEditing={isEditing}
-                isReject={isReject}
               />
               <FeedCardReaction
                 like={question.like}

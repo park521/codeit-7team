@@ -95,9 +95,18 @@ function IndividualFeed() {
   };
 
   // 삭제 기능
-  const handleClickDelete = async () => {
+  const handleDeleteSubject = async () => {
     const result = await deleteSubjects(subjectId);
     if (!result) return;
+  };
+
+  const handleDeleteClick = () => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      handleDeleteSubject();
+      alert("삭제가 완료되었습니다.");
+    } else {
+      alert("취소되었습니다.");
+    }
   };
 
   const handleDelete = () => {
@@ -155,11 +164,13 @@ function IndividualFeed() {
         {/* 삭제하기 버튼 */}
         {isAnswerPage && (
           <section className={styles.delete_Feed}>
-            <DefaultButton
-              innerText={"삭제하기"}
-              hasArrow={false}
-              onClick={handleClickDelete}
-            />
+            <Link to="/">
+              <DefaultButton
+                innerText={"삭제하기"}
+                hasArrow={false}
+                onClick={handleDeleteClick}
+              />
+            </Link>
           </section>
         )}
         <section className={styles.question_header}>
