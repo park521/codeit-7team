@@ -1,7 +1,19 @@
 import React from "react";
 
-function DropdownIcon({ type, size = 14, className, isHovered, ...props }) {
-  const fillColor = isHovered ? "var(--blue50-color)" : "var(--gray50-color)";
+function DropdownIcon({
+  type,
+  size = 14,
+  className,
+  isHovered,
+  isDisabled,
+  ...props
+}) {
+  const fillColor = !isDisabled
+    ? isHovered
+      ? "var(--blue50-color)"
+      : "var(--gray60-color)"
+    : "var(--gray50-color)";
+
   const iconType =
     type === "수정하기"
       ? "edit"

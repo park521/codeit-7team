@@ -56,9 +56,9 @@ function FeedCardEditMenu({
 
   // 드롭다운 메뉴
   const values = [
-    { value: "수정하기" },
-    { value: "삭제하기" },
-    { value: "거절하기" },
+    { value: "수정하기", isDisabled: !answer, isEdit: "true" },
+    { value: "삭제하기", isEdit: "true" },
+    { value: "거절하기", isEdit: "true" },
   ];
 
   // 드롭다운 핸들러
@@ -73,19 +73,18 @@ function FeedCardEditMenu({
       handleRefusal();
     }
   }
+
   return (
     <EditMenu>
       <Badge answer={answer} />
       {isAnswerPage && (
-        <>
-          <Dropdown
-            values={values}
-            isImageButton="true"
-            imageButtonSrc={More}
-            imageButtonAlt="드롭다운 버튼 이미지"
-            onChange={handleDropdownChange}
-          />
-        </>
+        <Dropdown
+          values={values}
+          isImageButton="true"
+          imageButtonSrc={More}
+          imageButtonAlt="드롭다운 버튼 이미지"
+          onChange={handleDropdownChange}
+        />
       )}
     </EditMenu>
   );

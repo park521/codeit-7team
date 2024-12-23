@@ -39,7 +39,7 @@
   border: 1px solid var(--gray30-color);
   border-radius: 8px;
   font-size: 14px;
-  color: var(--gray40-color);
+  color: var(--gray50-color);
   box-shadow: var(--box-shadow-1pt);
   z-index: 1;
   list-style-type: none;
@@ -74,6 +74,7 @@
   height: 26px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .dropdown_menu_item_image {
@@ -85,4 +86,18 @@
 .dropdown_item_icon {
   width: 14px;
   height: 14px;
+}
+
+.dropdown_menu_item.edit.disabled {
+  color: var(--gray50-color);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.dropdown_menu .edit {
+  color: var(--gray60-color);
+}
+
+.dropdown_menu .edit:hover {
+  color: var(--blue50-color);
 }
