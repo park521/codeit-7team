@@ -4,10 +4,7 @@
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Pretendard", sans-serif;
 }
 
 .right_arrow {
@@ -88,6 +85,18 @@ body {
   background-color: var(--brown50-color);
 }
 
+/* 비활성화된 버튼 스타일 */
+.answer_completed_button:disabled {
+  background-color: #dcdcdc; /* 비활성화 색상 */
+  color: #999999; /* 글자 색상 */
+  cursor: not-allowed; /* 비활성화 시 커서 */
+}
+
+/* 비활성화된 버튼 스타일 hover */
+.answer_completed_button:disabled:hover {
+  border: none;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .answer_completed_button {
     width: 34.25rem;
@@ -127,7 +136,7 @@ body {
   background-color: var(--brown20-color);
 }
 
-.go_question_button>img {
+.go_question_button > img {
   position: absolute;
 }
 

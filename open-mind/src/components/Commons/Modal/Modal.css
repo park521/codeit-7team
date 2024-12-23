@@ -1,5 +1,6 @@
 body {
   font-family: Pretendard;
+  min-width: 376px;
 }
 
 .modal_back {
@@ -127,7 +128,7 @@ body {
   height: 24px;
 }
 
-@media (max-width: 376px) {
+@media screen and (min-width: 375px) and (max-width: 767px) {
   .modal_content {
     width: 327px;
     padding: 24px;

@@ -4,10 +4,7 @@
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Pretendard", sans-serif;
 }
 
 .links {
@@ -26,6 +23,7 @@ body {
 
 .link_item:hover {
   outline: 1px solid var(--gray60-color);
+  cursor: pointer;
 }
 
 .link_item:active {
@@ -44,6 +42,7 @@ body {
 
 .kakaotalk_item:hover {
   outline: 1px solid var(--gray60-color);
+  cursor: pointer;
 }
 
 .kakaotalk_item:active {
@@ -62,6 +61,7 @@ body {
 
 .facebook_item:hover {
   outline: 1px solid var(--gray60-color);
+  cursor: pointer;
 }
 
 .facebook_item:active {
