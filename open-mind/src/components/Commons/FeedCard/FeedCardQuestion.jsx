@@ -12,6 +12,7 @@ const FeedQuestionTime = styled.div`
   font-weight: 500;
   font-size: 0.875rem;
   color: var(--gray40-color);
+  line-height: 1.125rem;
 `;
 
 const FeedQuestionTitle = styled.div`
@@ -19,6 +20,7 @@ const FeedQuestionTitle = styled.div`
   font-weight: 400;
   font-size: 1.125rem;
   color: var(--gray60-color);
+  line-height: 1.125rem;
 
   @media screen and (min-width: 375px) and (max-width: 767px) {
     font-size: 1rem;
