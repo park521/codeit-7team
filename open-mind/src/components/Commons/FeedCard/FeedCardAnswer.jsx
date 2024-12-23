@@ -75,8 +75,15 @@ const StyledForm = styled.form`
   gap: 0.5rem;
 `;
 
+const AnswerRefusal = styled.p`
+  font-family: "Pretendard";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--red50-color, #b93333);
+`;
+
 const INITIAL_VALUES = {
-  content: "",
   isRejected: true,
   team: "12-7",
 };
@@ -88,7 +95,7 @@ function FeedCardAnswer({
   putAnswers,
   questionId,
   isEditing,
-  isReject,
+  isRejected,
   initialValues = INITIAL_VALUES,
 }) {
   const [values, setValues] = useState(() => ({
@@ -131,6 +138,7 @@ function FeedCardAnswer({
     const formData = {
       ...values,
       content: values.content,
+      isRejected: true,
       ...(type === "post" && { questionId }),
       ...(type === "put" && { answerId: answer.id }),
     };
@@ -157,7 +165,7 @@ function FeedCardAnswer({
           <DefaultButton
             innerText="답변 완료"
             onClick={(e) => handleSubmit(e, "post")}
-            disabled={!values.content.trim()}
+            disabled={!values.content}
           />
         </StyledForm>
       );
@@ -174,20 +182,12 @@ function FeedCardAnswer({
           <DefaultButton
             innerText="수정 완료"
             onClick={(e) => handleSubmit(e, "put")}
-            disabled={!values.content.trim()}
+            disabled={!values.content}
           />
         </StyledForm>
       );
     }
   };
-
-  if (isAnswerPage && answer && isReject) {
-    return (
-      <form>
-        <p>답변 거절</p>
-      </form>
-    );
-  }
 
   if (!isAnswerPage && !answer) {
     return null;
@@ -207,7 +207,10 @@ function FeedCardAnswer({
             </FeedAnswerCreatedAt>
           )}
         </FeedAnswerDetail>
-        {answer && !isEditing && (
+        {answer && !answer.isRejected && (
+          <AnswerRefusal>답변 거절</AnswerRefusal>
+        )}
+        {answer && !isEditing && answer.isRejected && (
           <FeedAnswerContent>{answer.content}</FeedAnswerContent>
         )}
         {renderForm()}

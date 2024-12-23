@@ -12,13 +12,47 @@ const EditMenu = styled.div`
 `;
 
 function FeedCardEditMenu({
+  answer,
   question,
   handleEditingClick,
   handleDeleteQuestion,
-  setIsReject,
+  postAnswers,
+  patchAnswers,
 }) {
   const location = useLocation();
   const isAnswerPage = location.pathname.includes("answer");
+
+  const handleRefusal = async () => {
+    try {
+      if (!answer) {
+        const formData = {
+          team: "12-7",
+          content: "임시 답변",
+          isRejected: false,
+          questionId: question.id,
+        };
+        await postAnswers(question.id, formData);
+        return;
+      }
+      if (answer.isRejected) {
+        // Answer가 존재하고, isRejected가 true일 때
+        const formData = {
+          isRejected: false,
+          answerId: answer.id,
+        };
+        await patchAnswers(answer.id, formData);
+      } else {
+        // Answer가 존재하고, isRejected가 false일 때
+        const formData = {
+          isRejected: true,
+          answerId: answer.id,
+        };
+        await patchAnswers(answer.id, formData);
+      }
+    } catch (error) {
+      console.error("Error during handleRefusal API call:", error);
+    }
+  };
 
   // 드롭다운 메뉴
   const values = [
@@ -36,12 +70,12 @@ function FeedCardEditMenu({
       handleDeleteQuestion();
     }
     if (selectedValue === "거절하기") {
-      setIsReject((prevState) => !prevState);
+      handleRefusal();
     }
   }
   return (
     <EditMenu>
-      <Badge answer={question.answer} />
+      <Badge answer={answer} />
       {isAnswerPage && (
         <>
           <Dropdown
