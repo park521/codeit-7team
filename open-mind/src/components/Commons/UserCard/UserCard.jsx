@@ -5,7 +5,7 @@ import styles from "./userCard.module.css";
 import Messages from "../../../assets/icon/messages-gray.svg";
 import Pagination from "../Pagination/Pagination.jsx";
 
-function UserCard({ sortType = "최신순" }) {
+function UserCard({ sortType = "최신순", searchQuery }) {
   const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -62,11 +62,25 @@ function UserCard({ sortType = "최신순" }) {
     return <p className={styles.noData}>유저 정보를 찾지 못했습니다.</p>;
   }
 
+  // 검색 필터
+  const filteredSubjects = searchQuery
+    ? subjects.filter((subject) =>
+        subject.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : subjects;
+
+  if (loading) {
+    return <p className={styles.loading}>Loading...</p>;
+  }
+
+  if (!filteredSubjects.length) {
+    return <p className={styles.noData}>해당 유저 정보가 없습니다.</p>;
+  }
+
   return (
     <div className={styles.grid_container}>
-      {/* 유저 카드 리스트 */}
       <div className={styles.user_card_grid}>
-        {subjects.map((subject) => (
+        {filteredSubjects.map((subject) => (
           <div key={subject.id} className={styles.user_card}>
             <Link to={`/post/${subject.id}`} className={styles.subject_link}>
               <div className={styles.user_card_container}>
