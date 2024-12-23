@@ -6,7 +6,7 @@ function InputTextArea({ value, onChange, placeholder, name }) {
     <textarea
       name={name}
       value={value}
-      onChange={(e) => onChange(e)}
+      onChange={onChange}
       placeholder={placeholder}
       className={styles.textarea}
     ></textarea>

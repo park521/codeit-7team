@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { formatDate } from "../../../utils/formatData";
 import { useLocation } from "react-router-dom";
 import DefaultButton from "../Buttons/DefaultButton";
+import InputTextArea from "../InputTextArea/InputTextArea";
 
 const FeedAnswerContainer = styled.div`
   display: flex;
@@ -68,19 +69,10 @@ const FeedAnswerContent = styled.p`
   font-weight: 400;
 `;
 
-const TextArea = styled.textarea`
-  width: 560px;
-  height: 186px;
-  padding: 16px;
-  border-radius: 8px;
-  background-color: var(--gray20-color);
-`;
-
-const Button = styled.button`
-  width: 560px;
-  height: 46px;
-  padding: 12px 24px;
-  border-radius: 8px;
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const INITIAL_VALUES = {
@@ -156,8 +148,8 @@ function FeedCardAnswer({
   const renderForm = () => {
     if (isAnswerPage && !answer) {
       return (
-        <form onSubmit={(e) => handleSubmit(e, "post")}>
-          <TextArea
+        <StyledForm onSubmit={(e) => handleSubmit(e, "post")}>
+          <InputTextArea
             name="content"
             value={values.content}
             onChange={handleChange}
@@ -167,14 +159,14 @@ function FeedCardAnswer({
             onClick={(e) => handleSubmit(e, "post")}
             disabled={!values.content.trim()}
           />
-        </form>
+        </StyledForm>
       );
     }
 
     if (isAnswerPage && answer && isEditing) {
       return (
-        <form onSubmit={(e) => handleSubmit(e, "put")}>
-          <TextArea
+        <StyledForm onSubmit={(e) => handleSubmit(e, "put")}>
+          <InputTextArea
             name="content"
             value={values.content}
             onChange={handleChange}
@@ -184,7 +176,7 @@ function FeedCardAnswer({
             onClick={(e) => handleSubmit(e, "put")}
             disabled={!values.content.trim()}
           />
-        </form>
+        </StyledForm>
       );
     }
   };
