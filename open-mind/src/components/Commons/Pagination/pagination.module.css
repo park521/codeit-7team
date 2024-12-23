@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+
 .pagination {
   display: flex;
   align-items: center;
@@ -16,6 +18,7 @@
   font-size: 20px;
   color: var(--gray40-color);
   padding: 0;
+  font-family: "Actor", serif !important;
 }
 
 .pagination,
