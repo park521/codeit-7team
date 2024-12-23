@@ -7,10 +7,6 @@
     "cra-template": "1.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-<<<<<<< HEAD
-    "react-helmet": "^6.1.0",
-=======
->>>>>>> 33f86a36da25e568070ca885cfbc320f00188597
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
