@@ -71,6 +71,7 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
   const fetchQuestionsList = async () => {
     try {
       const data = await getQuestionsList(subjectId, { limit: 5, offset: 0 });
+
       if (data) {
         // 데이터를 최신순으로 정렬 (내림차순)
         const sortedQuestions = data.results.sort(
@@ -167,8 +168,9 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
                 isEditing={isEditing}
               />
               <FeedCardReaction
-                like={question.like}
-                dislike={question.dislike}
+                initialLike={question.like}
+                initialDislike={question.dislike}
+                questionId={question.id}
               />
             </FeedCardBox>
           );
