@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { formatDate } from "../../../utils/formatData";
 import { useLocation } from "react-router-dom";
 import DefaultButton from "../Buttons/DefaultButton";
+import InputTextArea from "../InputTextArea/InputTextArea";
 
 const FeedAnswerContainer = styled.div`
   display: flex;
@@ -70,23 +71,21 @@ const FeedAnswerContent = styled.p`
   font-weight: 400;
 `;
 
-const TextArea = styled.textarea`
-  width: 560px;
-  height: 186px;
-  padding: 16px;
-  border-radius: 8px;
-  background-color: var(--gray20-color);
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
-const Button = styled.button`
-  width: 560px;
-  height: 46px;
-  padding: 12px 24px;
-  border-radius: 8px;
+const AnswerRefusal = styled.p`
+  font-family: "Pretendard";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--red50-color, #b93333);
 `;
 
 const INITIAL_VALUES = {
-  content: "",
   isRejected: true,
   team: "12-7",
 };
@@ -98,7 +97,7 @@ function FeedCardAnswer({
   putAnswers,
   questionId,
   isEditing,
-  isReject,
+  isRejected,
   initialValues = INITIAL_VALUES,
 }) {
   const [values, setValues] = useState(() => ({
@@ -141,6 +140,7 @@ function FeedCardAnswer({
     const formData = {
       ...values,
       content: values.content,
+      isRejected: true,
       ...(type === "post" && { questionId }),
       ...(type === "put" && { answerId: answer.id }),
     };
@@ -158,8 +158,8 @@ function FeedCardAnswer({
   const renderForm = () => {
     if (isAnswerPage && !answer) {
       return (
-        <form onSubmit={(e) => handleSubmit(e, "post")}>
-          <TextArea
+        <StyledForm onSubmit={(e) => handleSubmit(e, "post")}>
+          <InputTextArea
             name="content"
             value={values.content}
             onChange={handleChange}
@@ -167,16 +167,16 @@ function FeedCardAnswer({
           <DefaultButton
             innerText="답변 완료"
             onClick={(e) => handleSubmit(e, "post")}
-            disabled={!values.content.trim()}
+            disabled={!values.content}
           />
-        </form>
+        </StyledForm>
       );
     }
 
     if (isAnswerPage && answer && isEditing) {
       return (
-        <form onSubmit={(e) => handleSubmit(e, "put")}>
-          <TextArea
+        <StyledForm onSubmit={(e) => handleSubmit(e, "put")}>
+          <InputTextArea
             name="content"
             value={values.content}
             onChange={handleChange}
@@ -184,20 +184,12 @@ function FeedCardAnswer({
           <DefaultButton
             innerText="수정 완료"
             onClick={(e) => handleSubmit(e, "put")}
-            disabled={!values.content.trim()}
+            disabled={!values.content}
           />
-        </form>
+        </StyledForm>
       );
     }
   };
-
-  if (isAnswerPage && answer && isReject) {
-    return (
-      <form>
-        <p>답변 거절</p>
-      </form>
-    );
-  }
 
   if (!isAnswerPage && !answer) {
     return null;
@@ -217,7 +209,10 @@ function FeedCardAnswer({
             </FeedAnswerCreatedAt>
           )}
         </FeedAnswerDetail>
-        {answer && !isEditing && (
+        {answer && !answer.isRejected && (
+          <AnswerRefusal>답변 거절</AnswerRefusal>
+        )}
+        {answer && !isEditing && answer.isRejected && (
           <FeedAnswerContent>{answer.content}</FeedAnswerContent>
         )}
         {renderForm()}
