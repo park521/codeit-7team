@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { formatDate } from "../../../utils/formatData";
 import { useLocation } from "react-router-dom";
 import DefaultButton from "../Buttons/DefaultButton";
-import InputTextArea from "../InputTextArea/InputTextArea";
 
 const FeedAnswerContainer = styled.div`
   display: flex;
@@ -43,6 +42,8 @@ const commonFontStyle = `
 
 const FeedAnswerUserName = styled.p`
   ${commonFontStyle}
+  font-family: "Actor";
+  @import url("https://fonts.googleapis.com/css2?family=Actor&display=swap");
   font-weight: 400;
   font-size: 1.125rem;
 
@@ -69,10 +70,19 @@ const FeedAnswerContent = styled.p`
   font-weight: 400;
 `;
 
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+const TextArea = styled.textarea`
+  width: 560px;
+  height: 186px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--gray20-color);
+`;
+
+const Button = styled.button`
+  width: 560px;
+  height: 46px;
+  padding: 12px 24px;
+  border-radius: 8px;
 `;
 
 const INITIAL_VALUES = {
@@ -148,8 +158,8 @@ function FeedCardAnswer({
   const renderForm = () => {
     if (isAnswerPage && !answer) {
       return (
-        <StyledForm onSubmit={(e) => handleSubmit(e, "post")}>
-          <InputTextArea
+        <form onSubmit={(e) => handleSubmit(e, "post")}>
+          <TextArea
             name="content"
             value={values.content}
             onChange={handleChange}
@@ -159,14 +169,14 @@ function FeedCardAnswer({
             onClick={(e) => handleSubmit(e, "post")}
             disabled={!values.content.trim()}
           />
-        </StyledForm>
+        </form>
       );
     }
 
     if (isAnswerPage && answer && isEditing) {
       return (
-        <StyledForm onSubmit={(e) => handleSubmit(e, "put")}>
-          <InputTextArea
+        <form onSubmit={(e) => handleSubmit(e, "put")}>
+          <TextArea
             name="content"
             value={values.content}
             onChange={handleChange}
@@ -176,7 +186,7 @@ function FeedCardAnswer({
             onClick={(e) => handleSubmit(e, "put")}
             disabled={!values.content.trim()}
           />
-        </StyledForm>
+        </form>
       );
     }
   };
