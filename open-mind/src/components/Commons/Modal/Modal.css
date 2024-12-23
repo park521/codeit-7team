@@ -1,3 +1,8 @@
+body {
+  font-family: Pretendard;
+  min-width: 376px;
+}
+
 .modal_back {
   position: fixed;
   top: 0;
@@ -75,6 +80,7 @@
 }
 
 .modal_question {
+  font-family: "Pretendard";
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
@@ -84,14 +90,13 @@
   background-color: var(--gray20-color);
   border-radius: 8px;
   padding-bottom: 148px;
-}
-
-input {
   border: none;
   outline: none;
+  overflow: hidden;
+  resize: none;
 }
 
-input::placeholder {
+.modal_question::placeholder {
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
@@ -123,7 +128,7 @@ input::placeholder {
   height: 24px;
 }
 
-@media (max-width: 376px) {
+@media screen and (min-width: 375px) and (max-width: 767px) {
   .modal_content {
     width: 327px;
     padding: 24px;

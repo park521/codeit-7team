@@ -43,6 +43,8 @@ const commonFontStyle = `
 
 const FeedAnswerUserName = styled.p`
   ${commonFontStyle}
+  font-family: "Actor";
+  @import url("https://fonts.googleapis.com/css2?family=Actor&display=swap");
   font-weight: 400;
   font-size: 1.125rem;
 
