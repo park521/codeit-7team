@@ -12,6 +12,10 @@
   margin: 0px 50px 40px;
 }
 
+.header+* {
+  margin: 0 32px;
+}
+
 .header_logo {
   width: 146px;
   height: 57px;
@@ -24,9 +28,6 @@
   gap: 12px;
 }
 
-.body_top_banner+* {
-  margin: 0 32px;
-}
 
 .body_top_banner_text {
   font-size: 40px;
@@ -56,6 +57,13 @@
 
   .body_top_banner {
     flex-direction: row;
-    justify-content: center;
+    max-width: 460px;
+    margin: 0 auto;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .body_top_banner_text {
+    font-size: 24px;
   }
 }
