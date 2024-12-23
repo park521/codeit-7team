@@ -12,7 +12,23 @@ function UserCard({ sortType = "최신순" }) {
   // 페이지네이션 상태
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // totalPages 상태 추가
-  const itemsPerPage = 8; // 한 페이지당 항목 수
+  const [itemsPerPage, setItemsPerPage] = useState(8); // 한 페이지당 항목 수 상태로 관리
+
+  // 화면 크기 변화 감지
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      setItemsPerPage(window.innerWidth < 875 ? 6 : 8);
+    };
+
+    // 초기 설정
+    updateItemsPerPage();
+
+    window.addEventListener("resize", updateItemsPerPage);
+
+    return () => {
+      window.removeEventListener("resize", updateItemsPerPage);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchSubjects = async () => {
@@ -36,7 +52,7 @@ function UserCard({ sortType = "최신순" }) {
     };
 
     fetchSubjects();
-  }, [currentPage, sortType]);
+  }, [currentPage, sortType, itemsPerPage]);
 
   if (loading) {
     return <p className={styles.loading}>Loading...</p>;
