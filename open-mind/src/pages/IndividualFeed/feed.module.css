@@ -135,6 +135,12 @@ body {
   margin-bottom: 9.375rem;
 }
 
+.delete_Feed {
+  position: absolute;
+  margin-left: 614px;
+  margin-top: -40px;
+}
+
 /* 반응형 구현 */
 /* tablet */
 @media screen and (min-width: 768px) and (max-width: 1199px) {
@@ -144,6 +150,10 @@ body {
 
   .empty_main {
     width: 44rem;
+  }
+
+  .delete_Feed {
+    margin-left: 602px;
   }
 }
 
@@ -204,5 +214,10 @@ body {
 
   .no_question {
     margin-bottom: 9.375rem;
+  }
+
+  .delete_Feed {
+    margin-left: 255px;
+    margin-top: -30px;
   }
 }
