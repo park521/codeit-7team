@@ -35,6 +35,7 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
   const [subject, setSubject] = useState([]);
   const [questions, setQuestions] = useState([]); // 질문 리스트 상태
   const [editingState, setEditingState] = useState({});
+  const [isReject, setIsReject] = useState(false);
 
   // Fetch Subject
   useEffect(() => {
@@ -139,6 +140,7 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
                 question={question}
                 handleEditingClick={() => handleEditingClick(question.id)}
                 handleDeleteQuestion={() => handleDeleteQuestion(question.id)}
+                setIsReject={setIsReject}
               />
               <FeedCardQuestion question={question} />
               <FeedCardAnswer
@@ -148,6 +150,7 @@ function FeedCard({ questions: parentQuestions, onUpdateQuestions, onDelete }) {
                 postAnswers={handlePostAnswer}
                 putAnswers={handlePutAnswers}
                 isEditing={isEditing}
+                isReject={isReject}
               />
               <FeedCardReaction
                 like={question.like}

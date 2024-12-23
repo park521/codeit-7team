@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./dropdown.module.css";
+import DropdownIcon from "./DropdownIcon";
 
 /**
  *
@@ -29,6 +30,7 @@ function Dropdown({
   const [selectedValue, setSelectedValue] = useState(defaultValue);
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(null);
 
   const dropdownRef = useRef(null);
 
@@ -61,6 +63,14 @@ function Dropdown({
 
   function handleMouseLeave() {
     setIsHovered(false);
+  }
+
+  function handleItemMouseEnter(value) {
+    setHoveredItem(value);
+  }
+
+  function handleItemMouseLeave() {
+    setHoveredItem(null);
   }
 
   const iconToShow = isOpen
@@ -107,21 +117,17 @@ function Dropdown({
           isOpen ? styles.dropdown_menu_show : ""
         }`}
       >
-        {values.map(({ value, icon }) => (
+        {values.map(({ value }) => (
           <li
             key={value}
             className={`${styles.dropdown_menu_item} ${
               isImageButton ? styles.dropdown_menu_item_image : ""
             }`}
             onClick={() => handleSelect(value)}
+            onMouseEnter={() => handleItemMouseEnter(value)}
+            onMouseLeave={handleItemMouseLeave}
           >
-            {icon && (
-              <img
-                className={styles.dropdown_item_icon}
-                src={icon}
-                alt={`${value} 아이콘`}
-              />
-            )}
+            <DropdownIcon type={value} isHovered={hoveredItem === value} />
             {value}
           </li>
         ))}

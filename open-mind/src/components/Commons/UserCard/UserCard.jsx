@@ -47,7 +47,7 @@ function UserCard({ sortType = "최신순" }) {
   }
 
   return (
-    <div>
+    <div className={styles.grid_container}>
       {/* 유저 카드 리스트 */}
       <div className={styles.user_card_grid}>
         {subjects.map((subject) => (

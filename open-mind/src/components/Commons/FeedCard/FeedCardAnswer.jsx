@@ -96,6 +96,7 @@ function FeedCardAnswer({
   putAnswers,
   questionId,
   isEditing,
+  isReject,
   initialValues = INITIAL_VALUES,
 }) {
   const [values, setValues] = useState(() => ({
@@ -187,6 +188,14 @@ function FeedCardAnswer({
       );
     }
   };
+
+  if (isAnswerPage && answer && isReject) {
+    return (
+      <form>
+        <p>답변 거절</p>
+      </form>
+    );
+  }
 
   if (!isAnswerPage && !answer) {
     return null;
