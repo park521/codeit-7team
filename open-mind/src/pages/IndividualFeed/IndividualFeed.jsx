@@ -7,7 +7,7 @@ import Toast from "../../components/commons/Toast/Toast";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useLocation } from "react-router-dom";
-import { getSubjects } from "../../api/subjectApi/subjectApi";
+import { getSubjects, deleteSubjects } from "../../api/subjectApi/subjectApi";
 import { getQuestionsList } from "../../api/questionApi/questionApi";
 import { postQuestions } from "../../api/questionApi/questionApi";
 import FeedCard from "../../components/commons/FeedCard/FeedCard";
@@ -94,6 +94,12 @@ function IndividualFeed() {
     }
   };
 
+  // 삭제 기능
+  const handleClickDelete = async () => {
+    const result = await deleteSubjects(subjectId);
+    if (!result) return;
+  };
+
   const handleDelete = () => {
     setSubject((prev) => ({
       ...prev,
@@ -146,6 +152,16 @@ function IndividualFeed() {
       <main
         className={subject.questionCount > 0 ? styles.main : styles.empty_main}
       >
+        {/* 삭제하기 버튼 */}
+        {isAnswerPage && (
+          <section className={styles.delete_Feed}>
+            <DefaultButton
+              innerText={"삭제하기"}
+              hasArrow={false}
+              onClick={handleClickDelete}
+            />
+          </section>
+        )}
         <section className={styles.question_header}>
           <section>
             <img
