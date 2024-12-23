@@ -37,6 +37,7 @@ function QuestionListPage() {
           <Link to={"/"}>
             <img src={Logo} alt="로고 이미지" className={styles.header_logo} />
           </Link>
+          <div className={styles.header_space}></div>
           <DefaultButton
             innerText="답변하러 가기"
             hasArrow="true"
