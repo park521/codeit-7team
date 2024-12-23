@@ -1,7 +1,7 @@
 .container {
   display: flex;
+  max-width: 1040px;
   flex-direction: column;
-  max-width: 1200px;
   margin: 40px auto;
 }
 
@@ -9,20 +9,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 940px;
-  margin: 0 130px;
+  margin: 0px 50px 40px;
 }
 
 .header_logo {
   width: 146px;
   height: 57px;
-  flex-shrink: 0;
 }
 
 .body_top_banner {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 12px;
   margin: 40px;
 }
 
@@ -34,30 +33,29 @@
 }
 
 /* 태블릿 전용 스타일 */
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-  .header {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 850px;
-    padding: 0 50px;
+@media screen and (min-width: 769px) and (max-width: 1199px) {
+  .container {
+    margin-top: 40px;
   }
 }
 
+
 /* 모바일 전용 스타일 */
-@media screen and (min-width: 375px) and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .header {
+    margin: 0 auto;
     flex-direction: column;
-    margin: 0;
+    gap: 20px;
   }
 
   .body_top_banner {
     flex-direction: row;
-    justify-content: space-between;
-    margin: 52px 24px 16px;
+    margin: 40px 24px;
+    justify-content: center;
   }
 
   .body_top_banner_text {
-    font-size: 24px;
-    margin: 0;
+    font-size: 2.5rem;
+    margin-bottom: 0;
   }
 }
