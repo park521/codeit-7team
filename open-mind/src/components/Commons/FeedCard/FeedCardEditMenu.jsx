@@ -56,7 +56,7 @@ function FeedCardEditMenu({
 
   // 드롭다운 메뉴
   const values = [
-    { value: "수정하기" },
+    { value: "수정하기", isDisabled: !answer },
     { value: "삭제하기" },
     { value: "거절하기" },
   ];

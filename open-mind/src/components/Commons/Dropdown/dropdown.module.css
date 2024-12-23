@@ -74,6 +74,7 @@
   height: 26px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .dropdown_menu_item_image {
@@ -85,4 +86,18 @@
 .dropdown_item_icon {
   width: 14px;
   height: 14px;
+}
+
+.dropdown_menu_item.disabled {
+  color: var(--gray50-color);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.dropdown_menu_item.able {
+  color: var(--gray60-color);
+}
+
+.dropdown_menu_item.able:hover {
+  color: var(--blue50-color);
 }

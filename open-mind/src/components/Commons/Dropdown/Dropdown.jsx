@@ -117,17 +117,21 @@ function Dropdown({
           isOpen ? styles.dropdown_menu_show : ""
         }`}
       >
-        {values.map(({ value }) => (
+        {values.map(({ value, isDisabled }) => (
           <li
             key={value}
             className={`${styles.dropdown_menu_item} ${
-              isImageButton ? styles.dropdown_menu_item_image : ""
-            }`}
+              isDisabled ? styles.disabled : styles.able
+            } ${isImageButton ? styles.dropdown_menu_item_image : ""}`}
             onClick={() => handleSelect(value)}
             onMouseEnter={() => handleItemMouseEnter(value)}
             onMouseLeave={handleItemMouseLeave}
           >
-            <DropdownIcon type={value} isHovered={hoveredItem === value} />
+            <DropdownIcon
+              type={value}
+              isHovered={hoveredItem === value}
+              isDisabled={isDisabled}
+            />
             {value}
           </li>
         ))}
