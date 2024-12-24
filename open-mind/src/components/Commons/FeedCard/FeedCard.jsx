@@ -2,16 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getSubjects } from "../../../api/subjectApi/subjectApi";
+import { getSubjects } from "../../../api/subject/subject";
 import {
   getQuestionsList,
   deleteQuestions,
-} from "../../../api/questionApi/questionApi";
+} from "../../../api/question/question";
 import {
   postAnswers,
   putAnswers,
   patchAnswers,
-} from "../../../api/answerApi/answerApi";
+} from "../../../api/answer/answer";
 import FeedCardEditMenu from "./FeedCardEditMenu";
 import FeedCardQuestion from "./FeedCardQuestion";
 import FeedCardAnswer from "./FeedCardAnswer";

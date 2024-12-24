@@ -1,5 +1,5 @@
 import React from "react";
-import Badge from "../Badge/Badge";
+import Badge from "./Badge";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Dropdown from "../Dropdown/Dropdown";

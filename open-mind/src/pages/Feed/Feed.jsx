@@ -7,13 +7,12 @@ import Toast from "../../components/commons/Toast/Toast";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
-import { getSubjects, deleteSubjects } from "../../api/subjectApi/subjectApi";
-import { getQuestionsList } from "../../api/questionApi/questionApi";
-import { postQuestions } from "../../api/questionApi/questionApi";
+import { getSubjects, deleteSubjects } from "../../api/subject/subject";
+import { getQuestionsList, postQuestions } from "../../api/question/question";
 import FeedCard from "../../components/commons/FeedCard/FeedCard";
 import FeedCardEmpty from "../../components/commons/FeedCard/FeedCardEmpty";
 import Modal from "../../components/commons/Modal/Modal";
-import DefaultButton from "../../components/commons/Buttons/DefaultButton";
+import DefaultButton from "../../components/commons/Button/DefaultButton";
 //바꾸기
 const do_question_button = "질문 작성하기"; // desktop & tablet 버튼 텍스트
 const do_question_button_mobile = "질문 작성"; // mobile 버튼 텍스트
