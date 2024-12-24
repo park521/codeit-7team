@@ -12,7 +12,7 @@
   margin: 0px 50px 40px;
 }
 
-.header+* {
+.header + * {
   margin: 0 32px;
 }
 
@@ -28,11 +28,16 @@
   gap: 12px;
 }
 
-
 .body_top_banner_text {
   font-size: 40px;
   font-weight: 400;
   color: var(--gray60-color);
+}
+
+.search_input {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 /* 태블릿 전용 스타일 */
@@ -41,7 +46,6 @@
     margin-top: 40px;
   }
 }
-
 
 /* 모바일 전용 스타일 */
 @media screen and (max-width: 768px) {
