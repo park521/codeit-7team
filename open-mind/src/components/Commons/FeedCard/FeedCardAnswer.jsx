@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { formatDate } from "../../../utils/formatData";
+import { formatDate } from "../../../utils/formatDate";
 import { useLocation } from "react-router-dom";
 import DefaultButton from "../Buttons/DefaultButton";
 import InputTextArea from "../InputTextArea/InputTextArea";

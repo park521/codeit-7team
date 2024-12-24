@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { formatDate } from "../../../utils/formatData";
+import { formatDate } from "../../../utils/formatDate";
 
 const FeedQuestion = styled.div`
   display: flex;

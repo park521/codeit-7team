@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./feed.module.css";
 import logo from "../../assets/logo/logo.svg";
-import LinkItem from "../../components/commons/Link/LinkItem";
+import LinkItem from "../../components/commons/LinkItem/LinkItem";
 import messagesIcon from "../../assets/icon/messages-brown.svg";
 import Toast from "../../components/commons/Toast/Toast";
 import { useState, useEffect } from "react";
