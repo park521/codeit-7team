@@ -1,4 +1,5 @@
 .main {
+  overflow-x: hidden;
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -18,15 +19,6 @@
   margin-left: auto;
 }
 
-.main__form_logo {
-  font-size: 0;
-  width: 28.5rem;
-  height: 11.25rem;
-  color: transparent;
-  background: url(../../assets/logo/logo.svg) center / contain no-repeat;
-  margin: 4.375rem auto 1.5625rem;
-}
-
 .main__form_group {
   display: flex;
   width: 25rem;
@@ -35,6 +27,16 @@
   padding: 2rem;
   background-color: #fff;
   border-radius: 1rem;
+}
+
+.main__form_logo {
+  position: relative;
+  font-size: 0;
+  width: 28.5rem;
+  height: 11.25rem;
+  color: transparent;
+  /* background: url(../../assets/logo/logo.svg) center / contain no-repeat; */
+  margin: 4.375rem auto 1.5625rem;
 }
 
 .main__form_group>a {
@@ -78,5 +80,123 @@
 
   .main__form_group>button {
     width: 100%;
+  }
+}
+
+/* 애니메이션 */
+.circle {
+  display: inline-block;
+  width: 232px;
+  height: 92px;
+  border-radius: 50%;
+  border: 1px solid lime;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin: 0 auto;
+  position: absolute;
+}
+
+.circle:nth-child(1) {
+  border-color: #CACACA;
+  transform: translateY(-40px) rotate(34deg);
+}
+
+.circle:nth-child(2) {
+  animation: ani1 1s forwards;
+  border-color: #959595;
+  transform: translateY(-40px) rotate(34deg);
+}
+
+@keyframes ani1 {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-40px) rotate(21deg);
+  }
+}
+
+.main__form_logo_title img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  animation: ani2 1s forwards;
+  animation-delay: 1s;
+}
+
+.main__form_logo_title img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.main__form_logo_title img:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.main__form_logo_title img:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.main__form_logo_title img:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+.main__form_logo_title img:nth-child(5) {
+  animation-delay: 1.2s;
+}
+
+.main__form_logo_title img:nth-child(6) {
+  animation-delay: 1.5s;
+}
+
+.main__form_logo_title img:nth-child(7) {
+  animation-delay: 1.8s;
+}
+
+.main__form_logo_title img:nth-child(8) {
+  animation-delay: 2.1s;
+}
+
+@keyframes ani2 {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main__form_logo_subtitle img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  animation: ani3 1.5s forwards;
+  animation-delay: 2s;
+}
+
+.main__form_logo_subtitle img:nth-child(1) {
+  margin-left: -300%;
+}
+
+.main__form_logo_subtitle img:nth-child(2) {
+  margin-left: 300%;
+}
+
+@keyframes ani3 {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    margin-left: 0;
   }
 }

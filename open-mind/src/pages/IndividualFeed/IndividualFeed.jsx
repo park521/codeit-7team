@@ -6,7 +6,7 @@ import messagesIcon from "../../assets/icon/messages-brown.svg";
 import Toast from "../../components/commons/Toast/Toast";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { getSubjects, deleteSubjects } from "../../api/subjectApi/subjectApi";
 import { getQuestionsList } from "../../api/questionApi/questionApi";
 import { postQuestions } from "../../api/questionApi/questionApi";
@@ -32,6 +32,7 @@ function IndividualFeed() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const isAnswerPage = location.pathname.match(/^\/post\/\d+\/answer$/);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -98,6 +99,7 @@ function IndividualFeed() {
   const handleDeleteSubject = async () => {
     const result = await deleteSubjects(subjectId);
     if (!result) return;
+    navigate("/");
   };
 
   const handleDeleteClick = () => {
@@ -119,10 +121,7 @@ function IndividualFeed() {
   if (!subject) {
     return <div>Loading...</div>; // subject 데이터가 없으면 로딩 화면 표시
   }
-  // console.log("Question Count:", subject.questionCount);
-  // console.log("Subject Data:", subject);
-  // console.log("Questions State:", questions);
-  // console.log("Questions Length:", questions.length);
+
   return (
     <div className={styles.body_contanier}>
       {/* 페이스북 공유 메타 태그 추가 (subject 데이터가 있을 때만 설정) */}
@@ -199,7 +198,7 @@ function IndividualFeed() {
           )}
         </section>
       </main>
-      {/* 컨플릭해결 */}
+
       {/* 토스트 메시지 */}
       {toastVisible && (
         <div className={styles.toast_container}>
