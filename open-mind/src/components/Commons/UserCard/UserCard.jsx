@@ -6,65 +6,80 @@ import Messages from "../../../assets/icon/messages-gray.svg";
 import Pagination from "../Pagination/Pagination.jsx";
 
 function UserCard({ sortType = "최신순", searchQuery }) {
+  const [allSubjects, setAllSubjects] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // 페이지네이션 상태
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1); // totalPages 상태 추가
-  const [itemsPerPage, setItemsPerPage] = useState(8); // 한 페이지당 항목 수 상태로 관리
+  const [totalPages, setTotalPages] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
 
-  // 화면 크기 변화 감지
+  const [isAllDataLoaded, setIsAllDataLoaded] = useState(false);
+
+  // 화면 크기 변화 감지 (반응형)
   useEffect(() => {
     const updateItemsPerPage = () => {
       setItemsPerPage(window.innerWidth < 875 ? 6 : 8);
     };
 
-    // 초기 설정
     updateItemsPerPage();
-
     window.addEventListener("resize", updateItemsPerPage);
-
     return () => {
       window.removeEventListener("resize", updateItemsPerPage);
     };
   }, []);
 
+  // 전체 데이터를 가져오기 (검색 기능용 데이터)
   useEffect(() => {
-    const fetchSubjects = async () => {
-      setLoading(true);
-      try {
-        const offset = (currentPage - 1) * itemsPerPage;
-        const sortParam = sortType === "최신순" ? "time" : "name"; // 정렬 기준 설정
-        const data = await getSubjectsList({
-          limit: itemsPerPage,
-          offset,
-          sort: sortParam,
-        });
+    if (searchQuery && !isAllDataLoaded) {
+      const fetchAllSubjects = async () => {
+        setLoading(true);
+        try {
+          const data = await getSubjectsList({ limit: 1000, sort: "name" });
+          setAllSubjects(data.results || []);
+          setIsAllDataLoaded(true);
+        } catch (error) {
+          console.error("검색 기능 에러:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-        setSubjects(data.results || []);
-        setTotalPages(Math.ceil(data.count / itemsPerPage)); // 총 페이지 수 설정
-      } catch (error) {
-        console.error("Error fetching subjects:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+      fetchAllSubjects();
+    }
+  }, [searchQuery, isAllDataLoaded]);
 
-    fetchSubjects();
-  }, [currentPage, sortType, itemsPerPage]);
+  // 현재 페이지 데이터를 가져오기 (페이지네이션&정렬)
+  useEffect(() => {
+    if (!searchQuery) {
+      const fetchPageSubjects = async () => {
+        setLoading(true);
+        try {
+          const offset = (currentPage - 1) * itemsPerPage;
+          const sortParam = sortType === "최신순" ? "time" : "name";
+          const data = await getSubjectsList({
+            limit: itemsPerPage,
+            offset,
+            sort: sortParam,
+          });
 
-  if (loading) {
-    return <p className={styles.loading}>Loading...</p>;
-  }
+          setSubjects(data.results || []);
+          setTotalPages(Math.ceil(data.count / itemsPerPage));
+        } catch (error) {
+          console.error("페이지네이션&정렬 기능 에러:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-  if (!subjects.length) {
-    return <p className={styles.noData}>유저 정보를 찾지 못했습니다.</p>;
-  }
+      fetchPageSubjects();
+    }
+  }, [currentPage, sortType, itemsPerPage, searchQuery]);
 
   // 검색 필터
   const filteredSubjects = searchQuery
-    ? subjects.filter((subject) =>
+    ? allSubjects.filter((subject) =>
         subject.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : subjects;
@@ -107,13 +122,15 @@ function UserCard({ sortType = "최신순", searchQuery }) {
         ))}
       </div>
 
-      {/* 페이지네이션 컴포넌트 사용 */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
-        groupSize={5}
-      />
+      {/* 페이지네이션 */}
+      {!searchQuery && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+          groupSize={5}
+        />
+      )}
     </div>
   );
 }
