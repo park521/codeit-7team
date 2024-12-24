@@ -36,8 +36,8 @@
 
 .search_input {
   display: flex;
-  justify-content: center;
-  margin-top: 40px;
+  justify-content: flex-end;
+  margin: 10px 18px 0 0;
 }
 
 /* 태블릿 전용 스타일 */
@@ -69,5 +69,9 @@
 
   .body_top_banner_text {
     font-size: 24px;
+  }
+  .search_input {
+    justify-content: center;
+    margin-bottom: 10px;
   }
 }
