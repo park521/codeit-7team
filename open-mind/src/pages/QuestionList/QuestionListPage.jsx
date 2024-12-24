@@ -64,16 +64,17 @@ function QuestionListPage() {
               iconActive={ArrowUpDarkIcon}
             />
           </div>
-          <UserCard sortType={sortType} searchQuery={searchQuery} />
-        </div>
-        <div className={styles.search_input_container}>
-          <div className={styles.search_input}>
-            <InputField
-              placeholder="유저 이름을 검색하세요"
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
+          <div className={styles.search_input_container}>
+            <div className={styles.search_input}>
+              <InputField
+                placeholder="유저 이름을 검색하세요"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="search"
+              />
+            </div>
           </div>
+          <UserCard sortType={sortType} searchQuery={searchQuery} />
         </div>
       </div>
     </div>
