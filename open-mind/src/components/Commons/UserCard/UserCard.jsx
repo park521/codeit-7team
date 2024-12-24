@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getSubjectsList } from "../../../api/subjectApi/subjectApi.js";
+import { getSubjectsList } from "../../../api/subject/subject.js";
 import styles from "./userCard.module.css";
 import Messages from "../../../assets/icon/messages-gray.svg";
 import Pagination from "../Pagination/Pagination.jsx";

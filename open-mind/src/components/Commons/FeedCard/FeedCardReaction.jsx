@@ -4,7 +4,7 @@ import { ReactComponent as LikeIconBlue } from "../../../assets/icon/thumbs-up-b
 import { ReactComponent as DisLikeIconGray } from "../../../assets/icon/thumbs-down-gray.svg";
 import { ReactComponent as DisLikeIconBlue } from "../../../assets/icon/thumbs-down-blue.svg";
 import styled from "styled-components";
-import { postQuestionsReaction } from "../../../api/questionApi/questionApi"; // API 호출 함수 import
+import { postQuestionsReaction } from "../../../api/question/question"; // API 호출 함수 import
 
 const FeedFavoriteContainer = styled.div`
   display: flex;
