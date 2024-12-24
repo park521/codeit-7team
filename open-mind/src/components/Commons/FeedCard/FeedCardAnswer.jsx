@@ -184,7 +184,7 @@ function FeedCardAnswer({
           <DefaultButton
             innerText="수정 완료"
             onClick={(e) => handleSubmit(e, "put")}
-            disabled={!values.content}
+            disabled={!values.content || answer.content === values.content}
           />
         </StyledForm>
       );
