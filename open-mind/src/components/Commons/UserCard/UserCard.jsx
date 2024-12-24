@@ -40,7 +40,7 @@ function UserCard({ sortType = "최신순", searchQuery }) {
           setAllSubjects(data.results || []);
           setIsAllDataLoaded(true);
         } catch (error) {
-          console.error("Error fetching all subjects:", error);
+          console.error("검색 기능 에러:", error);
         } finally {
           setLoading(false);
         }
@@ -67,7 +67,7 @@ function UserCard({ sortType = "최신순", searchQuery }) {
           setSubjects(data.results || []);
           setTotalPages(Math.ceil(data.count / itemsPerPage));
         } catch (error) {
-          console.error("Error fetching page subjects:", error);
+          console.error("페이지네이션&정렬 기능 에러:", error);
         } finally {
           setLoading(false);
         }
