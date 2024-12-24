@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./homepage.module.css";
 import InputField from "../../components/commons/Input/InputField";
-import DefaultButton from "../../components/commons/Buttons/DefaultButton";
+import DefaultButton from "../../components/commons/Button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { handleCreateFeed } from "../../api/subject/subject";
 
