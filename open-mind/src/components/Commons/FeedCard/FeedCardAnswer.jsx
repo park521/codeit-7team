@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { formatDate } from "../../../utils/formatDate";
 import { useLocation } from "react-router-dom";
-import DefaultButton from "../Button/DefaultButton";
+import DefaultButton from "../Button/Button";
 import InputTextArea from "../Input/InputTextArea";
 
 const FeedAnswerContainer = styled.div`

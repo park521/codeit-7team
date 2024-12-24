@@ -7,7 +7,7 @@ import Dropdown from "../../components/commons/Dropdown/Dropdown";
 import ArrowDownGrayIcon from "../../assets/icon/arrow-down-gray.svg";
 import ArrowDownDarkIcon from "../../assets/icon/arrow-down.svg";
 import ArrowUpDarkIcon from "../../assets/icon/arrow-up.svg";
-import DefaultButton from "../../components/commons/Button/DefaultButton";
+import DefaultButton from "../../components/commons/Button/Button";
 import InputField from "../../components/commons/Input/InputField";
 
 function QuestionListPage() {
