@@ -8,11 +8,17 @@ import ArrowDownGrayIcon from "../../assets/icon/arrow-down-gray.svg";
 import ArrowDownDarkIcon from "../../assets/icon/arrow-down.svg";
 import ArrowUpDarkIcon from "../../assets/icon/arrow-up.svg";
 import DefaultButton from "../../components/commons/Buttons/DefaultButton";
+import InputField from "../../components/commons/InputField/InputField";
 
 function QuestionListPage() {
   const [sortType, setSortType] = useState("최신순");
   const navigate = useNavigate();
   const values = [{ value: "최신순" }, { value: "이름순" }];
+  const [searchQuery, setSearchQuery] = useState("");
+
+  function handleSearchChange(value) {
+    setSearchQuery(value);
+  }
 
   function handleDropdownChange(selectedValue) {
     setSortType(selectedValue);
@@ -58,7 +64,16 @@ function QuestionListPage() {
               iconActive={ArrowUpDarkIcon}
             />
           </div>
-          <UserCard sortType={sortType} />
+          <UserCard sortType={sortType} searchQuery={searchQuery} />
+        </div>
+        <div className={styles.search_input_container}>
+          <div className={styles.search_input}>
+            <InputField
+              placeholder="유저 이름을 검색하세요"
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+          </div>
         </div>
       </div>
     </div>
