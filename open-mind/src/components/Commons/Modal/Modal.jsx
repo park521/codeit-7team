@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import questionIcon from "../../../assets/icon/messages.svg";
 import closeIcon from "../../../assets/icon/close.svg";
-import TextArea from "../InputTextArea/InputTextArea";
+import TextArea from "../Input/InputTextArea";
 import "./Modal.css";
 
 const INITIAL_VALUES = {

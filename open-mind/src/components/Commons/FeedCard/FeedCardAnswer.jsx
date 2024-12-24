@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { formatDate } from "../../../utils/formatData";
 import { useLocation } from "react-router-dom";
 import DefaultButton from "../Buttons/DefaultButton";
-import InputTextArea from "../InputTextArea/InputTextArea";
+import InputTextArea from "../Input/InputTextArea";
 
 const FeedAnswerContainer = styled.div`
   display: flex;
