@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { formatDate } from "../../../utils/formatData";
+import { formatDate } from "../../../utils/formatDate";
 import { useLocation } from "react-router-dom";
-import DefaultButton from "../Buttons/DefaultButton";
-import InputTextArea from "../InputTextArea/InputTextArea";
+import DefaultButton from "../Button/Button";
+import InputTextArea from "../Input/InputTextArea";
 
 const FeedAnswerContainer = styled.div`
   display: flex;
@@ -184,7 +184,7 @@ function FeedCardAnswer({
           <DefaultButton
             innerText="수정 완료"
             onClick={(e) => handleSubmit(e, "put")}
-            disabled={!values.content}
+            disabled={!values.content || answer.content === values.content}
           />
         </StyledForm>
       );

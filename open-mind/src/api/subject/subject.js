@@ -2,25 +2,33 @@
 const BASE_URL = `https://openmind-api.vercel.app/12-7/`;
 
 // 질문 대상 생성
-export async function postSubjects(formData) {
-  if (!formData) {
-    throw new Error("postSubjects Error: formData is required");
+export async function handleCreateFeed(name, navigate) {
+  if (!name) {
+    alert("이름을 입력해주세요.");
+    return;
   }
 
   try {
     const response = await fetch(`${BASE_URL}subjects/`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ name: name }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+
     if (!response.ok) {
-      throw new Error(`HTTP response error: ${response.status}`);
+      throw new Error("피드 생성에 실패했습니다.");
     }
-    const body = await response.json();
-    return body;
+
+    const data = await response.json();
+    localStorage.setItem("id", data.id);
+    const feedId = data.id;
+
+    navigate(`/post/${feedId}/answer`);
   } catch (error) {
-    console.error("post subject Error:", error);
-    throw error;
+    console.error("피드 생성 에러:", error);
+    alert("피드 생성 중 오류가 발생했습니다.");
   }
 }
 
