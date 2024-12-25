@@ -101,12 +101,14 @@ function IndividualFeed() {
     navigate("/");
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (e) => {
     if (window.confirm("삭제하시겠습니까?")) {
       handleDeleteSubject();
+      localStorage.removeItem("id");
       alert("삭제가 완료되었습니다.");
     } else {
       alert("취소되었습니다.");
+      e.preventDefault();
     }
   };
 

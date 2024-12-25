@@ -22,6 +22,15 @@ function FeedCardEditMenu({
   const location = useLocation();
   const isAnswerPage = location.pathname.includes("answer");
 
+  const handleDeleteClick = (e) => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      handleDeleteQuestion();
+      alert("삭제가 완료되었습니다.");
+    } else {
+      alert("취소되었습니다.");
+    }
+  };
+
   const handleRefusal = async () => {
     try {
       if (!answer) {
@@ -67,7 +76,7 @@ function FeedCardEditMenu({
       handleEditingClick();
     }
     if (selectedValue === "삭제하기") {
-      handleDeleteQuestion();
+      handleDeleteClick();
     }
     if (selectedValue === "거절하기") {
       handleRefusal();
