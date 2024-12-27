@@ -4,6 +4,7 @@ import { getSubjectsList } from "../../../api/subject/subject.js";
 import styles from "./userCard.module.css";
 import Messages from "../../../assets/icon/messages-gray.svg";
 import Pagination from "../Pagination/Pagination.jsx";
+import { SyncLoader } from "react-spinners";
 
 function UserCard({ sortType = "최신순", searchQuery }) {
   const [allSubjects, setAllSubjects] = useState([]);
@@ -85,7 +86,11 @@ function UserCard({ sortType = "최신순", searchQuery }) {
     : subjects;
 
   if (loading) {
-    return <p className={styles.loading}>Loading...</p>;
+    return (
+      <div className={styles.loading}>
+        <SyncLoader color="var(--gray60-color)" size={20} />
+      </div>
+    );
   }
 
   if (!filteredSubjects.length) {

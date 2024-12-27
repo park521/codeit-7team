@@ -4,6 +4,7 @@ import logo from "../../assets/logo/logo.svg";
 import LinkItem from "../../components/commons/LinkItem/LinkItem";
 import messagesIcon from "../../assets/icon/messages-brown.svg";
 import Toast from "../../components/commons/Toast/Toast";
+import { useInView } from "react-intersection-observer"; // 무한 스크롤 필요로 라이브러리 추가 => 커밋 후 머지 용도
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
@@ -33,6 +34,15 @@ function IndividualFeed() {
   const isAnswerPage = location.pathname.match(/^\/post\/\d+\/answer$/);
   const navigate = useNavigate();
 
+  const [hasMore, setHasMore] = useState(true); // 더 이상 불러올 데이터가 있는지 여부
+  const [loading, setLoading] = useState(false); // 데이터를 불러오는 중인지 확인
+
+  const { ref, inView } = useInView({
+    triggerOnce: false, // 계속해서 트리거가 가능하도록 설정
+    threshold: 0.8, // 요소가 화면 50%만큼 보일 때 트리거
+  });
+  const limit = 3; // 한 번에 불러올 데이터의 수
+
   useEffect(() => {
     const handleResize = () => {
       setInnerText(getInnerText(window.innerWidth)); // 화면 크기 변경 시 상태 업데이트
@@ -54,13 +64,15 @@ function IndividualFeed() {
         if (subjectData) {
           setSubject(subjectData);
 
-          const limit = subjectData.questionCount;
+          // const limit = subjectData.questionCount;
+
           // 질문 리스트 가져오기
           const questionsData = await getQuestionsList(subjectId, {
             limit: limit,
             offset: 0,
           });
           setQuestions(questionsData.results || []); // 질문 데이터 업데이트
+          setHasMore(questionsData.results.length === limit); // 데이터가 limit만큼 있으면 더 로드 가능
         } else {
           setSubject(null);
           setQuestions([]);
@@ -72,6 +84,31 @@ function IndividualFeed() {
 
     fetchSubjectAndQuestions();
   }, [subjectId]);
+
+  // 무한 스크롤 기능
+  useEffect(() => {
+    if (inView && !loading && hasMore) {
+      // 화면 하단에 도달하고, 로딩 중이 아니며 더 불러올 데이터가 있으면
+      const loadMoreQuestions = async () => {
+        setLoading(true);
+        try {
+          const offset = questions.length;
+          const response = await getQuestionsList(subjectId, {
+            limit,
+            offset,
+          });
+          setQuestions((prev) => [...prev, ...response.results]); // 새로운 질문을 기존 리스트에 추가
+          setHasMore(response.results.length === limit); // 더 이상 불러올 데이터가 없으면 false
+        } catch (error) {
+          console.error("Error loading more questions:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      loadMoreQuestions();
+    }
+  }, [inView, loading, hasMore, questions.length, subjectId]);
 
   // 링크 복사 후 토스트 표시
   const handleCopyToast = () => {
@@ -183,7 +220,7 @@ function IndividualFeed() {
           </section>
           <section className={styles.question_header_text}>
             {questions.length > 0
-              ? `${questions.length}개의 질문이 있습니다`
+              ? `${subject.questionCount}개의 질문이 있습니다`
               : "아직 질문이 없습니다"}
           </section>
         </section>
@@ -197,6 +234,13 @@ function IndividualFeed() {
           ) : (
             <FeedCardEmpty />
           )}
+          {/* IntersectionObserver를 위한 div */}
+          <div
+            ref={ref}
+            style={{ height: "20px", fontSize: "1.5rem", textAlign: "center" }}
+          >
+            {loading && <p>Loading...</p>}
+          </div>
         </section>
       </main>
 

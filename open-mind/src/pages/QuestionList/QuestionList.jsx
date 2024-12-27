@@ -71,6 +71,7 @@ function QuestionListPage() {
                 value={searchQuery}
                 onChange={handleSearchChange}
                 className="search"
+                clear
               />
             </div>
           </div>
