@@ -4,7 +4,7 @@ import logo from "../../assets/logo/logo.svg";
 import LinkItem from "../../components/commons/LinkItem/LinkItem";
 import messagesIcon from "../../assets/icon/messages-brown.svg";
 import Toast from "../../components/commons/Toast/Toast";
-import { useInView } from "react-intersection-observer"; // 무한 스크롤 필요로 라이브러리 추가
+import { useInView } from "react-intersection-observer"; // 무한 스크롤 필요로 라이브러리 추가 => 커밋 후 머지 용도
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
