@@ -13,9 +13,10 @@
 }
 
 .user_card {
-  min-width: 186px;
+  min-width: 155.5px;
   max-width: 220px;
-  height: 187px;
+  max-height: 187px;
+  min-height: 168px;
   border: 1px solid var(--gray40-color);
   border-radius: 16px;
   transition: background-color 0.8s ease;
@@ -56,6 +57,7 @@
 .question {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 22px;
   margin: 0;
   color: var(--gray40-color);
@@ -106,5 +108,9 @@ p {
     grid-template-columns: repeat(2, 1fr);
     max-width: 460px;
     margin: 16px auto 40px;
+  }
+  .question,
+  p {
+    font-size: 14px;
   }
 }
