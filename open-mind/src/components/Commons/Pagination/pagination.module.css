@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Actor&display=swap");
 
 .pagination {
   display: flex;
@@ -30,4 +30,10 @@
 
 .pagination .activePage {
   color: var(--brown40-color);
+}
+
+.pagination_prev_btn.disabled,
+.pagination_next_btn.disabled {
+  color: var(--gray30-color);
+  cursor: not-allowed;
 }

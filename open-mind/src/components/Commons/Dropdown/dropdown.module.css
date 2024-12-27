@@ -43,7 +43,7 @@
   box-shadow: var(--box-shadow-1pt);
   z-index: 1;
   list-style-type: none;
-  padding: 0;
+  padding: 5px 0;
   margin-top: 4px;
   left: 50%;
   transform: translateX(-50%);
