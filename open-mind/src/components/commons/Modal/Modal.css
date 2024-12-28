@@ -1,0 +1,160 @@
+body {
+  font-family: Pretendard;
+  min-width: 376px;
+}
+
+.modal_back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_content {
+  background-color: var(--gray10-color);
+  width: 612px;
+  padding: 40px 40px 70px 40px;
+  border-radius: 24px;
+  box-shadow: var(--box-shadow-3pt);
+  text-align: center;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal_header_left {
+  display: flex;
+  gap: 13px;
+}
+
+.modal_header_left img {
+  width: 28px;
+  height: 28px;
+}
+
+.modal_header:last-child img {
+  width: 23px;
+  height: 23px;
+  cursor: pointer;
+}
+
+.modal_header h2 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+}
+
+.modal_to {
+  margin-top: 40px;
+  margin-bottom: 12px;
+  display: flex;
+}
+
+.modal_to h4 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0;
+  text-align: left;
+}
+
+.modal_to .modal_profile_image {
+  width: 28px;
+  height: 28px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.modal_to img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.modal_question {
+  font-family: "Pretendard";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  padding: 16px;
+  width: 532px;
+  height: 180px;
+  background-color: var(--gray20-color);
+  border-radius: 8px;
+  padding-bottom: 148px;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  resize: none;
+}
+
+.modal_question::placeholder {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--gray40-color);
+  padding-top: 0;
+}
+
+.post_button {
+  background-color: var(--brown40-color);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  padding: 12px 229px;
+  color: var(--gray10-color);
+  border: none;
+  border-radius: 8px;
+  white-space: nowrap;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.post_button:disabled {
+  background-color: var(--brown30-color);
+}
+
+.close_button {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .modal_content {
+    width: 327px;
+    padding: 24px;
+  }
+
+  .modal_header_left {
+    gap: 8px;
+  }
+
+  .modal_header h2 {
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+  .modal_header:last-child img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .modal_question {
+    width: 279px;
+    height: 358px;
+    padding-bottom: 326px;
+  }
+
+  .post_button {
+    padding: 12px 102.5px;
+  }
+}

@@ -1,0 +1,49 @@
+.input_container {
+  display: flex;
+  align-items: center;
+  width: 336px;
+  height: 46px;
+  border: 1px solid var(--gray40-color);
+  border-radius: 8px;
+  background-color: var(--gray10-color);
+}
+
+.input_container:focus-within {
+  border: 1px solid var(--brown40-color);
+}
+
+.input_icon {
+  margin: 13px 1px 13px 16px;
+}
+
+.input_field {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  color: var(--gray60-color);
+}
+
+.input_field::placeholder {
+  color: var(--gray40-color);
+  font-size: 16px;
+}
+
+.clear_button {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  background-color: var(--gray10-color);
+  border-radius: 50%;
+  border: none;
+  color: var(--gray40-color);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.clear_button:hover {
+  color: var(--gray60-color);
+  background-color: var(--gray20-color);
+}

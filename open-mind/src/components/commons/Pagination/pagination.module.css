@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Actor&display=swap");
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 21.5px;
+}
+
+.pagination,
+.pagination_prev_btn,
+.pagination_next_btn,
+.activePage,
+.pageNum {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: var(--gray40-color);
+  padding: 0;
+  font-family: "Actor", serif !important;
+}
+
+.pagination,
+.pageNum:hover,
+.pagination_prev_btn:hover,
+.pagination_next_btn:hover {
+  color: var(--gray60-color);
+}
+
+.pagination .activePage {
+  color: var(--brown40-color);
+}
+
+.pagination_prev_btn.disabled,
+.pagination_next_btn.disabled {
+  color: var(--gray30-color);
+  cursor: not-allowed;
+}

@@ -1,0 +1,232 @@
+/* global 가상 선택자 css 참조 */
+@import url("../../styles/global.css");
+@import url("https://fonts.googleapis.com/css2?family=Actor&display=swap");
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.body_contanier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+/* 헤더 ( 상단 로고 & 프로필 ) */
+
+.header {
+  width: 100%;
+}
+
+.header_background {
+  width: 100%;
+  height: 14.625rem;
+  background-image: url("../../assets/img/image1.svg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_logo {
+  padding-top: 3.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.header_logo_img {
+  width: 10.625rem;
+  height: 4.1875rem;
+}
+
+.header_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profile_img {
+  width: 8.5rem;
+  height: 8.5rem;
+  border-radius: 50%;
+}
+
+.nickname {
+  color: var(--gray60-color);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+/* 피드 내용 */
+
+.main {
+  margin-top: 11.8125rem;
+  width: 44.75rem;
+  height: 34rem;
+  background-color: var(--brown10-color);
+  border: 1px solid var(--brown30-color);
+  border-radius: 1rem;
+  overflow-y: auto;
+}
+
+.main::-webkit-scrollbar {
+  width: 10px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: var(--brown40-color); /* 스크롤바 색상 */
+  border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+
+.main::-webkit-scrollbar-track {
+  background: var(--brown20-color); /*스크롤바 뒷 배경 색상*/
+  border-radius: 10px;
+}
+
+.empty_main {
+  margin-top: 11.8125rem;
+  width: 44.75rem;
+  height: 20.625rem;
+  background-color: var(--brown10-color);
+  border: 1px solid var(--brown20-color);
+  border-radius: 1rem;
+}
+
+.question_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem 0 1rem 0;
+}
+
+.question_header_text {
+  font-family: "Actor";
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.5625rem;
+  color: var(--brown40-color);
+}
+
+.messages_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.feed_list > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.feed_list {
+  margin-bottom: 1rem;
+}
+
+.writing_question {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin: 3.625rem 1.5rem 1.5rem 0;
+  position: fixed;
+  bottom: 0;
+}
+
+.toast_container {
+  margin-top: 2.125rem;
+}
+
+.no_question {
+  margin-bottom: 9.375rem;
+}
+
+.delete_Feed {
+  position: absolute;
+  margin-left: 614px;
+  margin-top: -40px;
+}
+
+/* 반응형 구현 */
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .main {
+    width: 44rem;
+  }
+
+  .empty_main {
+    width: 44rem;
+  }
+
+  .delete_Feed {
+    margin-left: 602px;
+  }
+}
+
+/* mobile */
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .header_logo {
+    padding-top: 2.5rem;
+  }
+
+  .header_logo_img {
+    width: 7.75rem;
+    height: 3.0625rem;
+  }
+
+  .profile_img {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 50%;
+  }
+
+  .nickname {
+    color: var(--gray60-color);
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .main {
+    width: 20.4375rem;
+    margin-top: 7rem;
+  }
+
+  .empty_main {
+    width: 20.4375rem;
+    margin-top: 7rem;
+  }
+
+  .question_header_text {
+    font-family: "Actor";
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    color: var(--brown40-color);
+  }
+
+  .messages_icon {
+    width: 1.375rem;
+    height: 1.375rem;
+    margin-right: 0.5rem;
+  }
+
+  .writing_question {
+    margin: 3rem 1.5rem 1.5rem 0;
+  }
+
+  .toast_container {
+    margin-top: -1rem;
+  }
+
+  .no_question {
+    margin-bottom: 9.375rem;
+  }
+
+  .delete_Feed {
+    margin-left: 255px;
+    margin-top: -30px;
+  }
+}

@@ -1,0 +1,103 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown_button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--gray10-color);
+  color: var(--gray40-color);
+  padding: 8px 12px;
+  border: 1px solid var(--gray40-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown_button:hover {
+  border: 1px solid var(--gray60-color);
+  color: var(--gray60-color);
+}
+
+.dropdown_button_open {
+  border: 1px solid var(--gray60-color);
+  color: var(--gray60-color);
+}
+
+.dropdown_icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+}
+
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  background-color: var(--gray10-color);
+  border: 1px solid var(--gray30-color);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--gray50-color);
+  box-shadow: var(--box-shadow-1pt);
+  z-index: 1;
+  list-style-type: none;
+  padding: 5px 0;
+  margin-top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropdown_menu_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 79px;
+  height: 34px;
+  cursor: pointer;
+  gap: 2px;
+}
+
+.dropdown_menu_item:hover {
+  color: var(--blue50-color);
+}
+
+.dropdown_menu_show {
+  display: block;
+}
+
+/*드롭다운 버튼이 이미지인 경우*/
+
+.dropdown_image_button {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.dropdown_menu_item_image {
+  display: flex;
+  width: 103px;
+  height: 34px;
+  gap: 8px;
+}
+.dropdown_item_icon {
+  width: 14px;
+  height: 14px;
+}
+
+.dropdown_menu_item.edit.disabled {
+  color: var(--gray50-color);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.dropdown_menu .edit {
+  color: var(--gray60-color);
+}
+
+.dropdown_menu .edit:hover {
+  color: var(--blue50-color);
+}

@@ -1,0 +1,70 @@
+/* global 가상 선택자 css 참조 */
+@import url("../../../styles/global.css");
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Pretendard", sans-serif;
+}
+
+.links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.link_item {
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--brown40-color);
+  padding: 0.6875rem;
+  border-radius: 12.5rem;
+}
+
+.link_item:hover {
+  outline: 1px solid var(--gray60-color);
+  cursor: pointer;
+}
+
+.link_item:active {
+  border: none;
+  background-color: var(--brown50-color);
+}
+
+.kakaotalk_item {
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--yellow50-color);
+  padding: 0.6875rem;
+  border-radius: 12.5rem;
+}
+
+.kakaotalk_item:hover {
+  outline: 1px solid var(--gray60-color);
+  cursor: pointer;
+}
+
+.kakaotalk_item:active {
+  border: none;
+  background-color: #c9bf04;
+}
+
+.facebook_item {
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--blue50-color);
+  padding: 0.6875rem;
+  border-radius: 12.5rem;
+}
+
+.facebook_item:hover {
+  outline: 1px solid var(--gray60-color);
+  cursor: pointer;
+}
+
+.facebook_item:active {
+  border: none;
+  background-color: #1b6ce6;
+}
